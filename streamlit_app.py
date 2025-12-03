@@ -32,51 +32,57 @@ custom_css = """
     }
     
     .stApp {
-        background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
     
     .main .block-container {
-        background: rgba(0, 0, 0, 0.85);
-        backdrop-filter: blur(15px);
+        background: rgba(15, 15, 15, 0.95);
+        backdrop-filter: blur(5px);
         border-radius: 20px;
         padding: 30px;
-        box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-        border: 2px solid rgba(0, 255, 255, 0.5);
-        margin-top: 20px;
-        margin-bottom: 20px;
+        border: 2px solid transparent;
+        background-clip: padding-box;
         position: relative;
+        animation: containerPulse 3s ease-in-out infinite;
     }
     
     .main .block-container::before {
         content: '';
         position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(45deg, #00ffff, #00bfff, #0080ff, #00ffff);
+        inset: -2px;
+        background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff0080, #00ff80, #ff00ff);
         border-radius: 22px;
         z-index: -1;
-        animation: neonBorder 2s linear infinite;
+        animation: borderRotate 3s linear infinite;
+        filter: blur(1px);
     }
     
-    @keyframes neonBorder {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
+    @keyframes borderRotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes containerPulse {
+        0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
+        50% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.4); }
     }
     
     .main-header {
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(10, 10, 10, 0.95);
         padding: 3rem 2rem;
         border-radius: 25px;
         text-align: center;
         margin-bottom: 3rem;
-        box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
-        border: 3px solid rgba(0, 255, 255, 0.8);
+        border: 2px solid transparent;
+        background-clip: padding-box;
         position: relative;
         overflow: hidden;
     }
@@ -84,341 +90,323 @@ custom_css = """
     .main-header::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
-        animation: neonShine 2s infinite;
+        inset: -2px;
+        background: linear-gradient(45deg, #ffff00, #ff00ff, #00ffff, #ffff00);
+        border-radius: 27px;
+        z-index: -1;
+        animation: headerBorder 2.5s linear infinite;
     }
     
-    @keyframes neonShine {
-        0% { left: -100%; }
-        100% { left: 100%; }
+    @keyframes headerBorder {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.05); }
+        100% { transform: rotate(360deg) scale(1); }
     }
     
     .main-header h1 {
-        color: #00ffff;
+        background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ff00);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         font-size: 3.5rem;
         font-weight: 800;
         margin: 0;
-        text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
         letter-spacing: 1px;
-        animation: neonGlow 1.5s ease-in-out infinite alternate;
+        animation: textRainbow 2s linear infinite;
     }
     
-    @keyframes neonGlow {
-        from { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }
-        to { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff; }
+    @keyframes textRainbow {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 300% 50%; }
     }
     
     .main-header p {
-        color: #00bfff;
+        color: #00ffff;
         font-size: 1.4rem;
         font-weight: 600;
         margin-top: 1rem;
-        text-shadow: 0 0 10px #00bfff;
+        animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes pulseGlow {
+        from { text-shadow: 0 0 5px #00ffff; }
+        to { text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff; }
     }
     
     .stButton>button {
-        background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%);
+        background: linear-gradient(135deg, #ff00ff 0%, #00ffff 50%, #ffff00 100%);
+        background-size: 200% 200%;
         color: #000;
         border: none;
         border-radius: 15px;
         padding: 1rem 2.5rem;
         font-weight: 700;
         font-size: 1.1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        width: 100%;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
         position: relative;
         overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        animation: buttonShift 3s ease infinite;
     }
     
-    .stButton>button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-        transition: left 0.5s;
-    }
-    
-    .stButton>button:hover::before {
-        left: 100%;
+    @keyframes buttonShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
     
     .stButton>button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
-        background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%);
+        animation: none;
+        background: linear-gradient(135deg, #ffff00 0%, #ff00ff 100%);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 5px 15px rgba(255, 0, 255, 0.4);
     }
     
     .stTextInput>div>div>input, 
     .stTextArea>div>div>textarea, 
     .stNumberInput>div>div>input {
-        background: rgba(0, 0, 0, 0.8);
-        border: 2px solid #00ffff;
+        background: rgba(20, 20, 20, 0.9);
+        border: 2px solid transparent;
         border-radius: 12px;
         color: #fff;
         padding: 1rem;
         font-weight: 500;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        position: relative;
+        animation: inputBorder 4s linear infinite;
     }
     
     .stTextInput>div>div>input:focus, 
     .stTextArea>div>div>textarea:focus {
-        border-color: #00bfff;
-        box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
-        background: rgba(0, 0, 0, 0.95);
+        border-image: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00) 1;
+        background: rgba(20, 20, 20, 1);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    }
+    
+    @keyframes inputBorder {
+        0% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
+        25% { border-image: linear-gradient(45deg, #00ffff, #ffff00) 1; }
+        50% { border-image: linear-gradient(45deg, #ffff00, #00ff00) 1; }
+        75% { border-image: linear-gradient(45deg, #00ff00, #ff00ff) 1; }
+        100% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
     }
     
     label {
-        color: #00ffff !important;
+        color: #ffff00 !important;
         font-weight: 700 !important;
         font-size: 1rem !important;
         margin-bottom: 8px !important;
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        animation: labelGlow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes labelGlow {
+        from { text-shadow: 0 0 5px #ffff00; }
+        to { text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00; }
     }
     
     .stTabs [data-baseweb="tab-list"] {
         gap: 10px;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(20, 20, 20, 0.8);
         padding: 15px;
         border-radius: 15px;
-        border: 2px solid rgba(0, 255, 255, 0.5);
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        border: 2px solid transparent;
+        position: relative;
+        animation: tabContainer 4s linear infinite;
+    }
+    
+    @keyframes tabContainer {
+        0% { box-shadow: 0 0 10px rgba(255, 0, 255, 0.3); }
+        25% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
+        50% { box-shadow: 0 0 10px rgba(255, 255, 0, 0.3); }
+        75% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.3); }
     }
     
     .stTabs [data-baseweb="tab"] {
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(25, 25, 25, 0.9);
         border-radius: 12px;
         color: #00ffff;
         padding: 12px 25px;
         font-weight: 600;
         border: 2px solid transparent;
         transition: all 0.3s ease;
-        text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        position: relative;
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%);
+        background: linear-gradient(135deg, #00ff00 0%, #00ffff 100%);
         color: #000;
-        border-color: #00ffff;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        text-shadow: none;
+        border-image: linear-gradient(45deg, #00ff00, #00ffff) 1;
+        transform: scale(1.05);
     }
     
     [data-testid="stMetricValue"] {
-        color: #00ffff;
+        background: linear-gradient(45deg, #ff00ff, #00ffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         font-weight: 800;
         font-size: 2.2rem;
-        text-shadow: 0 0 15px #00ffff;
+        animation: metricGlow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes metricGlow {
+        from { filter: drop-shadow(0 0 5px #ff00ff); }
+        to { filter: drop-shadow(0 0 15px #00ffff); }
     }
     
     [data-testid="stMetricLabel"] {
-        color: #00bfff;
+        color: #ffff00;
         font-weight: 700;
         font-size: 1rem;
-        text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
     }
     
     .metric-container {
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(25, 25, 25, 0.95);
         padding: 20px;
         border-radius: 15px;
-        border: 2px solid #00ffff;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        border: 2px solid transparent;
+        position: relative;
+        animation: metricBorder 3s linear infinite;
+    }
+    
+    @keyframes metricBorder {
+        0% { border-image: linear-gradient(45deg, #00ff00, #ffff00) 1; }
+        100% { border-image: linear-gradient(45deg, #ffff00, #00ff00) 1; }
     }
     
     .console-section {
-        margin-top: 25px;
-        padding: 20px;
-        background: rgba(0, 0, 0, 0.95);
+        background: rgba(10, 10, 10, 0.98);
         border-radius: 15px;
-        border: 2px solid #00ffff;
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+        border: 2px solid transparent;
+        position: relative;
+        animation: consoleBorder 2.5s linear infinite;
+        overflow: hidden;
+    }
+    
+    @keyframes consoleBorder {
+        0% { border-image: linear-gradient(45deg, #00ffff, #ff00ff) 1; }
+        50% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
+        100% { border-image: linear-gradient(45deg, #00ffff, #ff00ff) 1; }
     }
     
     .console-header {
-        color: #00ffff;
+        background: linear-gradient(45deg, #ffff00, #ff0080);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         font-weight: 800;
         font-size: 1.5rem;
         margin-bottom: 20px;
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 1px;
-        text-shadow: 0 0 15px #00ffff;
+        animation: headerText 3s linear infinite;
+    }
+    
+    @keyframes headerText {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 300% 50%; }
     }
     
     .console-output {
         background: #000;
-        border: 2px solid #00ffff;
+        border: 1px solid #00ffff;
         border-radius: 12px;
         padding: 15px;
-        font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+        font-family: 'Courier New', monospace;
         font-size: 13px;
         color: #00ff88;
-        line-height: 1.7;
         max-height: 500px;
         overflow-y: auto;
         scrollbar-width: thin;
-        scrollbar-color: #00ffff #1a1a1a;
-        box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.2);
-    }
-    
-    .console-output::-webkit-scrollbar {
-        width: 10px;
-    }
-    
-    .console-output::-webkit-scrollbar-track {
-        background: #1a1a1a;
-        border-radius: 5px;
+        scrollbar-color: #00ffff #111;
     }
     
     .console-output::-webkit-scrollbar-thumb {
-        background: #00ffff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px #00ffff;
-    }
-    
-    .console-output::-webkit-scrollbar-thumb:hover {
-        background: #00bfff;
-        box-shadow: 0 0 15px #00bfff;
-    }
-    
-    .console-line {
-        margin-bottom: 5px;
-        word-wrap: break-word;
-        padding: 8px 12px;
-        padding-left: 35px;
-        color: #00ff88;
-        background: rgba(0, 255, 255, 0.1);
-        border-left: 3px solid #00ffff;
-        position: relative;
-        border-radius: 5px;
-    }
-    
-    .console-line::before {
-        content: '▶';
-        position: absolute;
-        left: 12px;
-        color: #00ffff;
-        font-weight: bold;
-        text-shadow: 0 0 5px #00ffff;
+        background: linear-gradient(#00ffff, #ff00ff);
     }
     
     .success-box {
         background: linear-gradient(135deg, #00ff88 0%, #00ffaa 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        color: #000;
-        text-align: center;
-        margin: 1rem 0;
-        font-weight: 700;
-        font-size: 1.1rem;
-        border: 2px solid rgba(0, 255, 136, 0.5);
-        box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+        border: 2px solid #00ff88;
+        animation: successPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes successPulse {
+        0%, 100% { box-shadow: 0 0 5px #00ff88; }
+        50% { box-shadow: 0 0 20px #00ff88; }
     }
     
     .error-box {
         background: linear-gradient(135deg, #ff4444 0%, #ff6666 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        color: #fff;
-        text-align: center;
-        margin: 1rem 0;
-        font-weight: 700;
-        font-size: 1.1rem;
-        border: 2px solid rgba(255, 68, 68, 0.5);
-        box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+        border: 2px solid #ff4444;
+        animation: errorPulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes errorPulse {
+        0%, 100% { box-shadow: 0 0 5px #ff4444; }
+        50% { box-shadow: 0 0 20px #ff4444; }
     }
     
     .info-card {
-        background: rgba(0, 0, 0, 0.9);
-        backdrop-filter: blur(15px);
-        padding: 2rem;
-        border-radius: 20px;
-        margin: 1.5rem 0;
-        border: 2px solid #00ffff;
-        box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        background: rgba(25, 25, 25, 0.95);
+        border: 2px solid transparent;
+        position: relative;
+        animation: infoBorder 4s linear infinite;
+    }
+    
+    @keyframes infoBorder {
+        0% { border-image: linear-gradient(45deg, #00bfff, #ff0080) 1; }
+        100% { border-image: linear-gradient(45deg, #ff0080, #00bfff) 1; }
     }
     
     .footer {
-        text-align: center;
-        padding: 2.5rem;
+        background: rgba(15, 15, 15, 0.95);
         color: #00ffff;
-        font-weight: 800;
-        font-size: 1.1rem;
-        margin-top: 4rem;
-        background: rgba(0, 0, 0, 0.9);
-        border-radius: 20px;
-        border-top: 3px solid #00ffff;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        text-shadow: 0 0 10px #00ffff;
+        border-top: 3px solid transparent;
+        position: relative;
+        animation: footerBorder 3s linear infinite;
+    }
+    
+    @keyframes footerBorder {
+        0% { border-image: linear-gradient(45deg, #ffff00, #00ffff) 1; }
+        100% { border-image: linear-gradient(45deg, #00ffff, #ffff00) 1; }
     }
     
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0c0c0c 0%, #1a1a2e 100%);
-        border-right: 3px solid #00ffff;
+        background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+        border-right: 3px solid transparent;
+        animation: sidebarBorder 2s linear infinite;
     }
     
-    [data-testid="stSidebar"] .element-container {
-        color: #00ffff;
+    @keyframes sidebarBorder {
+        0% { border-image: linear-gradient(#ff00ff, #00ffff) 1; }
+        100% { border-image: linear-gradient(#00ffff, #ff00ff) 1; }
     }
     
     .sidebar-header {
-        background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%);
-        padding: 2rem 1rem;
-        border-radius: 15px;
-        text-align: center;
-        margin-bottom: 2rem;
+        background: linear-gradient(135deg, #00ff00 0%, #ffff00 100%);
         color: #000;
-        font-weight: 800;
-        font-size: 1.3rem;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        animation: sidebarHeader 2.5s ease infinite;
     }
     
-    .brand-highlight {
-        background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-weight: 800;
-        text-shadow: none;
-    }
-    
-    .section-title {
-        color: #00ffff;
-        font-weight: 800;
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        border-bottom: 3px solid #00ffff;
-        padding-bottom: 0.5rem;
-        text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    @keyframes sidebarHeader {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
     }
     
     .status-running {
         color: #00ff00;
-        font-weight: 800;
-        text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+        text-shadow: 0 0 10px #00ff00;
+        animation: runningGlow 1s ease-in-out infinite alternate;
     }
     
-    .status-stopped {
-        color: #ff4444;
-        font-weight: 800;
-        text-shadow: 0 0 15px rgba(255, 68, 68, 0.8);
+    @keyframes runningGlow {
+        from { text-shadow: 0 0 5px #00ff00; }
+        to { text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00; }
     }
-</style>
+</style>          
 """
 
 st.markdown(custom_css, unsafe_allow_html=True)
