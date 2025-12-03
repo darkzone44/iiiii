@@ -24,17 +24,38 @@ st.set_page_config(
 )
 
 custom_css = """
-<style>
+        <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
     
     * {
         font-family: 'Poppins', sans-serif;
     }
     
+    :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a2e;
+        --bg-card: rgba(15, 15, 15, 0.98);
+        --border-neon: #00ffff;
+        --text-primary: #00ffff;
+        --text-secondary: #00bfff;
+        --input-bg: rgba(20, 20, 20, 0.95);
+    }
+    
+    [data-theme="light"] {
+        --bg-primary: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        --bg-secondary: #ffffff;
+        --bg-card: rgba(255, 255, 255, 0.98);
+        --border-neon: #ff00ff;
+        --text-primary: #ff00ff;
+        --text-secondary: #ff1493;
+        --input-bg: rgba(255, 255, 255, 0.95);
+    }
+    
     .stApp {
-        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+        background: var(--bg-primary);
         background-size: 400% 400%;
         animation: gradientShift 8s ease infinite;
+        transition: all 0.5s ease;
     }
     
     @keyframes gradientShift {
@@ -44,14 +65,14 @@ custom_css = """
     }
     
     .main .block-container {
-        background: rgba(15, 15, 15, 0.95);
-        backdrop-filter: blur(5px);
+        background: var(--bg-card);
         border-radius: 20px;
         padding: 30px;
         border: 2px solid transparent;
         background-clip: padding-box;
         position: relative;
         animation: containerPulse 3s ease-in-out infinite;
+        transition: all 0.5s ease;
     }
     
     .main .block-container::before {
@@ -62,7 +83,7 @@ custom_css = """
         border-radius: 22px;
         z-index: -1;
         animation: borderRotate 3s linear infinite;
-        filter: blur(1px);
+        filter: blur(0.5px);
     }
     
     @keyframes borderRotate {
@@ -71,12 +92,12 @@ custom_css = """
     }
     
     @keyframes containerPulse {
-        0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
-        50% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.4); }
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
     }
     
     .main-header {
-        background: rgba(10, 10, 10, 0.95);
+        background: var(--bg-card);
         padding: 3rem 2rem;
         border-radius: 25px;
         text-align: center;
@@ -85,6 +106,7 @@ custom_css = """
         background-clip: padding-box;
         position: relative;
         overflow: hidden;
+        transition: all 0.5s ease;
     }
     
     .main-header::before {
@@ -99,7 +121,7 @@ custom_css = """
     
     @keyframes headerBorder {
         0% { transform: rotate(0deg) scale(1); }
-        50% { transform: rotate(180deg) scale(1.05); }
+        50% { transform: rotate(180deg) scale(1.02); }
         100% { transform: rotate(360deg) scale(1); }
     }
     
@@ -122,7 +144,7 @@ custom_css = """
     }
     
     .main-header p {
-        color: #00ffff;
+        color: var(--text-primary);
         font-size: 1.4rem;
         font-weight: 600;
         margin-top: 1rem;
@@ -130,8 +152,8 @@ custom_css = """
     }
     
     @keyframes pulseGlow {
-        from { text-shadow: 0 0 5px #00ffff; }
-        to { text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff; }
+        from { filter: brightness(1); }
+        to { filter: brightness(1.2); }
     }
     
     .stButton>button {
@@ -148,6 +170,7 @@ custom_css = """
         text-transform: uppercase;
         letter-spacing: 0.5px;
         animation: buttonShift 3s ease infinite;
+        transition: all 0.3s ease;
     }
     
     @keyframes buttonShift {
@@ -160,27 +183,28 @@ custom_css = """
         animation: none;
         background: linear-gradient(135deg, #ffff00 0%, #ff00ff 100%);
         transform: translateY(-3px) scale(1.05);
-        box-shadow: 0 5px 15px rgba(255, 0, 255, 0.4);
+        transition: all 0.3s ease;
     }
     
     .stTextInput>div>div>input, 
     .stTextArea>div>div>textarea, 
     .stNumberInput>div>div>input {
-        background: rgba(20, 20, 20, 0.9);
+        background: var(--input-bg);
         border: 2px solid transparent;
         border-radius: 12px;
-        color: #fff;
+        color: var(--text-primary);
         padding: 1rem;
         font-weight: 500;
         position: relative;
         animation: inputBorder 4s linear infinite;
+        transition: all 0.3s ease;
     }
     
     .stTextInput>div>div>input:focus, 
     .stTextArea>div>div>textarea:focus {
         border-image: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00) 1;
-        background: rgba(20, 20, 20, 1);
-        box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        background: var(--input-bg);
+        transform: scale(1.02);
     }
     
     @keyframes inputBorder {
@@ -200,13 +224,44 @@ custom_css = """
     }
     
     @keyframes labelGlow {
-        from { text-shadow: 0 0 5px #ffff00; }
-        to { text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00; }
+        from { filter: brightness(1); }
+        to { filter: brightness(1.3); }
     }
     
+    /* Theme Toggle Button */
+    .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: linear-gradient(135deg, #ff00ff, #00ffff);
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #000;
+        font-weight: 800;
+        box-shadow: none;
+        animation: togglePulse 2s infinite;
+        transition: all 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+        transform: scale(1.1) rotate(180deg);
+        background: linear-gradient(135deg, #ffff00, #ff00ff);
+    }
+    
+    @keyframes togglePulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    /* Rest of your existing styles without shadow/blur */
     .stTabs [data-baseweb="tab-list"] {
         gap: 10px;
-        background: rgba(20, 20, 20, 0.8);
+        background: var(--bg-card);
         padding: 15px;
         border-radius: 15px;
         border: 2px solid transparent;
@@ -215,16 +270,16 @@ custom_css = """
     }
     
     @keyframes tabContainer {
-        0% { box-shadow: 0 0 10px rgba(255, 0, 255, 0.3); }
-        25% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
-        50% { box-shadow: 0 0 10px rgba(255, 255, 0, 0.3); }
-        75% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.3); }
+        0% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
+        25% { border-image: linear-gradient(45deg, #00ffff, #ffff00) 1; }
+        50% { border-image: linear-gradient(45deg, #ffff00, #00ff00) 1; }
+        75% { border-image: linear-gradient(45deg, #00ff00, #ff00ff) 1; }
     }
     
     .stTabs [data-baseweb="tab"] {
-        background: rgba(25, 25, 25, 0.9);
+        background: var(--input-bg);
         border-radius: 12px;
-        color: #00ffff;
+        color: var(--text-primary);
         padding: 12px 25px;
         font-weight: 600;
         border: 2px solid transparent;
@@ -250,37 +305,16 @@ custom_css = """
     }
     
     @keyframes metricGlow {
-        from { filter: drop-shadow(0 0 5px #ff00ff); }
-        to { filter: drop-shadow(0 0 15px #00ffff); }
-    }
-    
-    [data-testid="stMetricLabel"] {
-        color: #ffff00;
-        font-weight: 700;
-        font-size: 1rem;
-    }
-    
-    .metric-container {
-        background: rgba(25, 25, 25, 0.95);
-        padding: 20px;
-        border-radius: 15px;
-        border: 2px solid transparent;
-        position: relative;
-        animation: metricBorder 3s linear infinite;
-    }
-    
-    @keyframes metricBorder {
-        0% { border-image: linear-gradient(45deg, #00ff00, #ffff00) 1; }
-        100% { border-image: linear-gradient(45deg, #ffff00, #00ff00) 1; }
+        from { filter: brightness(1); }
+        to { filter: brightness(1.2); }
     }
     
     .console-section {
-        background: rgba(10, 10, 10, 0.98);
+        background: var(--bg-card);
         border-radius: 15px;
         border: 2px solid transparent;
         position: relative;
         animation: consoleBorder 2.5s linear infinite;
-        overflow: hidden;
     }
     
     @keyframes consoleBorder {
@@ -289,28 +323,9 @@ custom_css = """
         100% { border-image: linear-gradient(45deg, #00ffff, #ff00ff) 1; }
     }
     
-    .console-header {
-        background: linear-gradient(45deg, #ffff00, #ff0080);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-weight: 800;
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        animation: headerText 3s linear infinite;
-    }
-    
-    @keyframes headerText {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 300% 50%; }
-    }
-    
     .console-output {
         background: #000;
-        border: 1px solid #00ffff;
+        border: 1px solid var(--border-neon);
         border-radius: 12px;
         padding: 15px;
         font-family: 'Courier New', monospace;
@@ -319,94 +334,40 @@ custom_css = """
         max-height: 500px;
         overflow-y: auto;
         scrollbar-width: thin;
-        scrollbar-color: #00ffff #111;
+        scrollbar-color: var(--border-neon) #111;
     }
     
-    .console-output::-webkit-scrollbar-thumb {
-        background: linear-gradient(#00ffff, #ff00ff);
-    }
-    
-    .success-box {
-        background: linear-gradient(135deg, #00ff88 0%, #00ffaa 100%);
-        border: 2px solid #00ff88;
-        animation: successPulse 2s ease-in-out infinite;
-    }
-    
-    @keyframes successPulse {
-        0%, 100% { box-shadow: 0 0 5px #00ff88; }
-        50% { box-shadow: 0 0 20px #00ff88; }
-    }
-    
-    .error-box {
-        background: linear-gradient(135deg, #ff4444 0%, #ff6666 100%);
-        border: 2px solid #ff4444;
-        animation: errorPulse 1.5s ease-in-out infinite;
-    }
-    
-    @keyframes errorPulse {
-        0%, 100% { box-shadow: 0 0 5px #ff4444; }
-        50% { box-shadow: 0 0 20px #ff4444; }
-    }
-    
-    .info-card {
-        background: rgba(25, 25, 25, 0.95);
+    .footer, [data-testid="stSidebar"], .metric-container, .info-card {
+        background: var(--bg-card);
         border: 2px solid transparent;
-        position: relative;
-        animation: infoBorder 4s linear infinite;
-    }
-    
-    @keyframes infoBorder {
-        0% { border-image: linear-gradient(45deg, #00bfff, #ff0080) 1; }
-        100% { border-image: linear-gradient(45deg, #ff0080, #00bfff) 1; }
-    }
-    
-    .footer {
-        background: rgba(15, 15, 15, 0.95);
-        color: #00ffff;
-        border-top: 3px solid transparent;
-        position: relative;
-        animation: footerBorder 3s linear infinite;
-    }
-    
-    @keyframes footerBorder {
-        0% { border-image: linear-gradient(45deg, #ffff00, #00ffff) 1; }
-        100% { border-image: linear-gradient(45deg, #00ffff, #ffff00) 1; }
-    }
-    
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
-        border-right: 3px solid transparent;
-        animation: sidebarBorder 2s linear infinite;
-    }
-    
-    @keyframes sidebarBorder {
-        0% { border-image: linear-gradient(#ff00ff, #00ffff) 1; }
-        100% { border-image: linear-gradient(#00ffff, #ff00ff) 1; }
-    }
-    
-    .sidebar-header {
-        background: linear-gradient(135deg, #00ff00 0%, #ffff00 100%);
-        color: #000;
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
-        animation: sidebarHeader 2.5s ease infinite;
-    }
-    
-    @keyframes sidebarHeader {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 200% 50%; }
+        transition: all 0.5s ease;
     }
     
     .status-running {
         color: #00ff00;
-        text-shadow: 0 0 10px #00ff00;
         animation: runningGlow 1s ease-in-out infinite alternate;
     }
     
     @keyframes runningGlow {
-        from { text-shadow: 0 0 5px #00ff00; }
-        to { text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00; }
+        from { filter: brightness(1); }
+        to { filter: brightness(1.5); }
     }
-</style>          
+</style>
+
+<script>
+    function toggleTheme() {
+        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+        document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        document.querySelector('.theme-toggle').textContent = isDark ? '☀️' : '🌙';
+    }
+    
+    // Add toggle button
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'theme-toggle';
+    toggleBtn.textContent = '🌙';
+    toggleBtn.onclick = toggleTheme;
+    document.body.appendChild(toggleBtn);
+</script>
 """
 
 st.markdown(custom_css, unsafe_allow_html=True)
