@@ -30,18 +30,35 @@ custom_css = """
     * {
         font-family: 'Poppins', sans-serif;
     }
-    
     .stApp {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 50%, #e8f4ff 100%);
-        background-size: 400% 400%;
-        animation: gradientShift 8s ease infinite;
-    }
-    
-    @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+    background-color: #000000;
+    background-image:
+        radial-gradient(ellipse at 20% -10%, rgba(255, 255, 0, 0.85) 0, rgba(255, 255, 0, 0) 55%),
+        radial-gradient(ellipse at 80% -10%, rgba(255, 255, 255, 0.9) 0, rgba(255, 255, 255, 0) 55%),
+        radial-gradient(ellipse at 20% -10%, rgba(0, 0, 255, 0.85) 0, rgba(0, 0, 255, 0) 55%),
+        radial-gradient(ellipse at 80% -10%, rgba(255, 0, 255, 0.85) 0, rgba(255, 0, 255, 0) 55%),
+        radial-gradient(ellipse at 10% -10%, rgba(255, 0, 0, 0.85) 0, rgba(255, 0, 0, 0) 55%),
+        radial-gradient(ellipse at 90% -10%, rgba(0, 255, 255, 0.85) 0, rgba(0, 255, 255, 0) 55%);
+    background-repeat: no-repeat;
+    background-size: 60% 90%, 60% 90%, 60% 90%, 60% 90%, 60% 90%, 60% 90%;
+    background-position:
+        18% -40%,
+        82% -40%,
+        18% -40%,
+        82% -40%,
+        18% -40%,
+        82% -40%;
+    animation: discoColors 6s linear infinite;
+}  
+
+    @keyframes discoColors {
+    0%   { filter: hue-rotate(0deg); }
+    20%  { filter: hue-rotate(60deg); }
+    40%  { filter: hue-rotate(0deg); }
+    60%  { filter: hue-rotate(200deg); }
+    80%  { filter: hue-rotate(300deg); }
+    100% { filter: hue-rotate(0deg); }
+}
     
     .main .block-container {
         background: rgba(255, 255, 255, 0.95) !important;
