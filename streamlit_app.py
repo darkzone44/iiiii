@@ -31,39 +31,10 @@ custom_css = """
         font-family: 'Poppins', sans-serif;
     }
     
-    :root {
-        --bg-primary: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-        --bg-secondary: #1a1a2e;
-        --bg-card: rgba(20, 20, 30, 0.95);
-        --border-neon: #00ffff;
-        --text-primary: #00ffff;
-        --text-secondary: #00bfff;
-        --input-bg: rgba(25, 25, 40, 0.95);
-        --text-main: #ffffff;
-    }
-    
-    [data-theme="light"] {
-        --bg-primary: linear-gradient(135deg, #f8f9ff 0%, #e8f4ff 100%);
-        --bg-secondary: #f0f4ff;
-        --bg-card: rgba(255, 255, 255, 0.98);
-        --border-neon: #ff00ff;
-        --text-primary: #ff00ff;
-        --text-secondary: #ff1493;
-        --input-bg: rgba(248, 250, 255, 0.95);
-        --text-main: #1a1a2e;
-    }
-    
-    body[data-theme="dark"] .main-header h1 {
-        color: #00ffff !important;
-        text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-    }
-    
     .stApp {
-        background: var(--bg-primary);
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 50%, #e8f4ff 100%);
         background-size: 400% 400%;
         animation: gradientShift 8s ease infinite;
-        transition: all 0.5s ease;
-        min-height: 100vh;
     }
     
     @keyframes gradientShift {
@@ -73,37 +44,21 @@ custom_css = """
     }
     
     .main .block-container {
-        background: var(--bg-card) !important;
+        background: rgba(255, 255, 255, 0.95) !important;
         border-radius: 20px;
         padding: 30px;
         border: 2px solid transparent;
         background-clip: padding-box;
         position: relative;
         animation: containerPulse 3s ease-in-out infinite;
-        transition: all 0.5s ease;
-        color: var(--text-main);
     }
     
-    .main-header {
-        background: var(--bg-card) !important;
-        padding: 3rem 2rem;
-        border-radius: 25px;
-        text-align: center;
-        margin-bottom: 3rem;
-        border: 2px solid transparent;
-        background-clip: padding-box;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.5s ease;
-        color: var(--text-main);
-    }
-    
-    .main-header::before {
+    .main .block-container::before {
         content: '';
         position: absolute;
         inset: -2px;
         background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff0080, #00ff80, #ff00ff);
-        border-radius: 27px;
+        border-radius: 22px;
         z-index: -1;
         animation: borderRotate 3s linear infinite;
         filter: blur(0.5px);
@@ -114,8 +69,41 @@ custom_css = """
         100% { transform: rotate(360deg); }
     }
     
+    @keyframes containerPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+    }
+    
+    .main-header {
+        background: rgba(255, 255, 255, 0.98) !important;
+        padding: 3rem 2rem;
+        border-radius: 25px;
+        text-align: center;
+        margin-bottom: 3rem;
+        border: 2px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .main-header::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(45deg, #ffff00, #ff00ff, #00ffff, #ffff00);
+        border-radius: 27px;
+        z-index: -1;
+        animation: headerBorder 2.5s linear infinite;
+    }
+    
+    @keyframes headerBorder {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.02); }
+        100% { transform: rotate(360deg) scale(1); }
+    }
+    
     .main-header h1 {
-        background: linear-gradient(45deg, var(--text-primary), #ff00ff, #ffff00, #00ff00);
+        background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ff00);
         background-size: 300% 300%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -125,7 +113,6 @@ custom_css = """
         margin: 0;
         letter-spacing: 2px;
         animation: textRainbow 2s linear infinite;
-        text-shadow: none;
     }
     
     @keyframes textRainbow {
@@ -134,7 +121,7 @@ custom_css = """
     }
     
     .main-header p {
-        color: var(--text-primary);
+        color: #00ffff;
         font-size: 1.4rem;
         font-weight: 600;
         margin-top: 1rem;
@@ -147,7 +134,7 @@ custom_css = """
     }
     
     .stButton>button {
-        background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+        background: linear-gradient(135deg, #ff00ff 0%, #00ffff 50%, #ffff00 100%);
         background-size: 200% 200%;
         color: #000 !important;
         border: none;
@@ -178,10 +165,10 @@ custom_css = """
     .stTextInput>div>div>input, 
     .stTextArea>div>div>textarea, 
     .stNumberInput>div>div>input {
-        background: var(--input-bg) !important;
+        background: rgba(255, 255, 255, 0.9) !important;
         border: 2px solid transparent;
         border-radius: 12px;
-        color: var(--text-main) !important;
+        color: #333 !important;
         padding: 1rem;
         font-weight: 500;
         position: relative;
@@ -191,25 +178,39 @@ custom_css = """
     
     .stTextInput>div>div>input:focus, 
     .stTextArea>div>div>textarea:focus {
-        border-image: linear-gradient(45deg, var(--text-primary), #ff00ff) 1;
+        border-image: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00) 1;
+        background: rgba(255, 255, 255, 1) !important;
         transform: scale(1.02);
     }
     
+    @keyframes inputBorder {
+        0% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
+        25% { border-image: linear-gradient(45deg, #00ffff, #ffff00) 1; }
+        50% { border-image: linear-gradient(45deg, #ffff00, #00ff00) 1; }
+        75% { border-image: linear-gradient(45deg, #00ff00, #ff00ff) 1; }
+        100% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
+    }
+    
     label {
-        color: #ffff00 !important;
+        color: #ff00ff !important;
         font-weight: 700 !important;
         font-size: 1rem !important;
         margin-bottom: 8px !important;
         animation: labelGlow 2s ease-in-out infinite alternate;
     }
     
-    /* Theme Toggle Button */
+    @keyframes labelGlow {
+        from { filter: brightness(1); }
+        to { filter: brightness(1.3); }
+    }
+    
+    /* Dark Mode Toggle */
     .theme-toggle {
         position: fixed;
         top: 20px;
         right: 20px;
         z-index: 1000;
-        background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+        background: linear-gradient(135deg, #ff00ff, #00ffff);
         border: none;
         border-radius: 50%;
         width: 60px;
@@ -227,14 +228,19 @@ custom_css = """
         background: linear-gradient(135deg, #ffff00, #ff00ff);
     }
     
-    /* Sidebar & Other Elements */
+    @keyframes togglePulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    /* Other Elements */
     [data-testid="stSidebar"] {
-        background: var(--bg-secondary) !important;
-        border-right: 3px solid var(--border-neon);
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%) !important;
+        border-right: 3px solid #00ffff;
     }
     
     .stTabs [data-baseweb="tab-list"] {
-        background: var(--bg-card);
+        background: rgba(255, 255, 255, 0.9);
         gap: 10px;
         padding: 15px;
         border-radius: 15px;
@@ -242,23 +248,65 @@ custom_css = """
         animation: tabContainer 4s linear infinite;
     }
     
+    @keyframes tabContainer {
+        0% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
+        25% { border-image: linear-gradient(45deg, #00ffff, #ffff00) 1; }
+        50% { border-image: linear-gradient(45deg, #ffff00, #00ff00) 1; }
+        75% { border-image: linear-gradient(45deg, #00ff00, #ff00ff) 1; }
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 12px;
+        color: #333;
+        padding: 12px 25px;
+        font-weight: 600;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #00ff00 0%, #00ffff 100%);
+        color: #000;
+        border-image: linear-gradient(45deg, #00ff00, #00ffff) 1;
+        transform: scale(1.05);
+    }
+    
     .console-output {
         background: #000 !important;
-        border: 1px solid var(--border-neon);
+        border: 1px solid #00ffff;
         color: #00ff88 !important;
     }
     
-    /* Force visibility for all text */
-    h1, h2, h3, p, span, div, label {
-        color: var(--text-main) !important;
-        text-shadow: none;
+    .console-section {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        border: 2px solid transparent;
+        animation: consoleBorder 2.5s linear infinite;
     }
     
-    [data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3 {
-        color: var(--text-primary) !important;
+    @keyframes consoleBorder {
+        0% { border-image: linear-gradient(45deg, #00ffff, #ff00ff) 1; }
+        50% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
+        100% { border-image: linear-gradient(45deg, #00ffff, #ff00ff) 1; }
     }
 </style>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        document.querySelector('.theme-toggle').textContent = isDark ? '☀️' : '🌙';
+    }
+    
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'theme-toggle';
+    toggleBtn.textContent = '🌙';
+    toggleBtn.onclick = toggleDarkMode;
+    document.body.appendChild(toggleBtn);
+});
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     function toggleTheme() {
