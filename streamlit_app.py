@@ -32,7 +32,7 @@ custom_css = """
     }
     
     .stApp {
-        background: linear-gradient(135deg, #ffffff 0%, #ffe6f2 50%, #ffccff 100%);
+        background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -40,24 +40,43 @@ custom_css = """
     }
     
     .main .block-container {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(15px);
         border-radius: 20px;
         padding: 30px;
-        box-shadow: 0 8px 32px rgba(255, 105, 180, 0.2);
-        border: 2px solid rgba(255, 182, 193, 0.3);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        border: 2px solid rgba(0, 255, 255, 0.5);
         margin-top: 20px;
         margin-bottom: 20px;
+        position: relative;
+    }
+    
+    .main .block-container::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #00ffff, #00bfff, #0080ff, #00ffff);
+        border-radius: 22px;
+        z-index: -1;
+        animation: neonBorder 2s linear infinite;
+    }
+    
+    @keyframes neonBorder {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
     }
     
     .main-header {
-        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 50%, #dc143c 100%);
+        background: rgba(0, 0, 0, 0.9);
         padding: 3rem 2rem;
         border-radius: 25px;
         text-align: center;
         margin-bottom: 3rem;
-        box-shadow: 0 15px 40px rgba(255, 20, 147, 0.3);
-        border: 3px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+        border: 3px solid rgba(0, 255, 255, 0.8);
         position: relative;
         overflow: hidden;
     }
@@ -66,152 +85,181 @@ custom_css = """
         content: '';
         position: absolute;
         top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-        animation: shine 3s infinite;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+        animation: neonShine 2s infinite;
     }
     
-    @keyframes shine {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
+    @keyframes neonShine {
+        0% { left: -100%; }
+        100% { left: 100%; }
     }
     
     .main-header h1 {
-        color: white;
+        color: #00ffff;
         font-size: 3.5rem;
         font-weight: 800;
         margin: 0;
-        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
         letter-spacing: 1px;
+        animation: neonGlow 1.5s ease-in-out infinite alternate;
+    }
+    
+    @keyframes neonGlow {
+        from { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }
+        to { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff; }
     }
     
     .main-header p {
-        color: rgba(255, 255, 255, 0.95);
+        color: #00bfff;
         font-size: 1.4rem;
         font-weight: 600;
         margin-top: 1rem;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        text-shadow: 0 0 10px #00bfff;
     }
     
     .stButton>button {
-        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
-        color: white;
+        background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%);
+        color: #000;
         border: none;
         border-radius: 15px;
         padding: 1rem 2.5rem;
         font-weight: 700;
         font-size: 1.1rem;
         transition: all 0.3s ease;
-        box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         width: 100%;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .stButton>button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.5s;
+    }
+    
+    .stButton>button:hover::before {
+        left: 100%;
     }
     
     .stButton>button:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(255, 20, 147, 0.6);
-        background: linear-gradient(135deg, #ff1493 0%, #dc143c 100%);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+        background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%);
     }
     
     .stTextInput>div>div>input, 
     .stTextArea>div>div>textarea, 
     .stNumberInput>div>div>input {
-        background: rgba(255, 255, 255, 0.9);
-        border: 2px solid #ffb6c1;
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid #00ffff;
         border-radius: 12px;
-        color: #333;
+        color: #fff;
         padding: 1rem;
         font-weight: 500;
         font-size: 1rem;
         transition: all 0.3s ease;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
     }
     
     .stTextInput>div>div>input:focus, 
     .stTextArea>div>div>textarea:focus {
-        background: rgba(255, 255, 255, 1);
-        border-color: #ff1493;
-        box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.1);
-        color: #333;
+        border-color: #00bfff;
+        box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        background: rgba(0, 0, 0, 0.95);
     }
     
     label {
-        color: #ff1493 !important;
+        color: #00ffff !important;
         font-weight: 700 !important;
         font-size: 1rem !important;
         margin-bottom: 8px !important;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     }
     
     .stTabs [data-baseweb="tab-list"] {
         gap: 10px;
-        background: rgba(255, 182, 193, 0.2);
+        background: rgba(0, 0, 0, 0.7);
         padding: 15px;
         border-radius: 15px;
-        border: 2px solid rgba(255, 105, 180, 0.2);
+        border: 2px solid rgba(0, 255, 255, 0.5);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
     }
     
     .stTabs [data-baseweb="tab"] {
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(0, 0, 0, 0.8);
         border-radius: 12px;
-        color: #ff1493;
+        color: #00ffff;
         padding: 12px 25px;
         font-weight: 600;
         border: 2px solid transparent;
         transition: all 0.3s ease;
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
-        color: white;
-        border-color: #ff1493;
-        box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+        background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%);
+        color: #000;
+        border-color: #00ffff;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        text-shadow: none;
     }
     
     [data-testid="stMetricValue"] {
-        color: #ff1493;
+        color: #00ffff;
         font-weight: 800;
         font-size: 2.2rem;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        text-shadow: 0 0 15px #00ffff;
     }
     
     [data-testid="stMetricLabel"] {
-        color: #ff6b9d;
+        color: #00bfff;
         font-weight: 700;
         font-size: 1rem;
+        text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
     }
     
     .metric-container {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(0, 0, 0, 0.9);
         padding: 20px;
         border-radius: 15px;
-        border: 2px solid #ffb6c1;
-        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+        border: 2px solid #00ffff;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
     
     .console-section {
         margin-top: 25px;
         padding: 20px;
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(0, 0, 0, 0.95);
         border-radius: 15px;
-        border: 2px solid #ff1493;
-        box-shadow: 0 4px 20px rgba(255, 20, 147, 0.1);
+        border: 2px solid #00ffff;
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
     }
     
     .console-header {
-        color: #ff1493;
+        color: #00ffff;
         font-weight: 800;
         font-size: 1.5rem;
         margin-bottom: 20px;
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 1px;
+        text-shadow: 0 0 15px #00ffff;
     }
     
     .console-output {
-        background: #1a1a1a;
-        border: 2px solid #ff1493;
+        background: #000;
+        border: 2px solid #00ffff;
         border-radius: 12px;
         padding: 15px;
         font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
@@ -221,7 +269,8 @@ custom_css = """
         max-height: 500px;
         overflow-y: auto;
         scrollbar-width: thin;
-        scrollbar-color: #ff1493 #333;
+        scrollbar-color: #00ffff #1a1a1a;
+        box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.2);
     }
     
     .console-output::-webkit-scrollbar {
@@ -229,17 +278,19 @@ custom_css = """
     }
     
     .console-output::-webkit-scrollbar-track {
-        background: #333;
+        background: #1a1a1a;
         border-radius: 5px;
     }
     
     .console-output::-webkit-scrollbar-thumb {
-        background: #ff1493;
+        background: #00ffff;
         border-radius: 5px;
+        box-shadow: 0 0 10px #00ffff;
     }
     
     .console-output::-webkit-scrollbar-thumb:hover {
-        background: #ff6b9d;
+        background: #00bfff;
+        box-shadow: 0 0 15px #00bfff;
     }
     
     .console-line {
@@ -248,8 +299,8 @@ custom_css = """
         padding: 8px 12px;
         padding-left: 35px;
         color: #00ff88;
-        background: rgba(255, 20, 147, 0.05);
-        border-left: 3px solid #ff1493;
+        background: rgba(0, 255, 255, 0.1);
+        border-left: 3px solid #00ffff;
         position: relative;
         border-radius: 5px;
     }
@@ -258,107 +309,114 @@ custom_css = """
         content: '▶';
         position: absolute;
         left: 12px;
-        color: #ff1493;
+        color: #00ffff;
         font-weight: bold;
+        text-shadow: 0 0 5px #00ffff;
     }
     
     .success-box {
-        background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        background: linear-gradient(135deg, #00ff88 0%, #00ffaa 100%);
         padding: 1.5rem;
         border-radius: 15px;
-        color: white;
+        color: #000;
         text-align: center;
         margin: 1rem 0;
         font-weight: 700;
         font-size: 1.1rem;
-        border: 2px solid rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(0, 255, 136, 0.5);
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
     }
     
     .error-box {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        background: linear-gradient(135deg, #ff4444 0%, #ff6666 100%);
         padding: 1.5rem;
         border-radius: 15px;
-        color: white;
+        color: #fff;
         text-align: center;
         margin: 1rem 0;
         font-weight: 700;
         font-size: 1.1rem;
-        border: 2px solid rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(255, 68, 68, 0.5);
+        box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
     }
     
     .info-card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(15px);
         padding: 2rem;
         border-radius: 20px;
         margin: 1.5rem 0;
-        border: 2px solid #ffb6c1;
-        box-shadow: 0 8px 25px rgba(255, 105, 180, 0.15);
+        border: 2px solid #00ffff;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
     }
     
     .footer {
         text-align: center;
         padding: 2.5rem;
-        color: #ff1493;
+        color: #00ffff;
         font-weight: 800;
         font-size: 1.1rem;
         margin-top: 4rem;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(0, 0, 0, 0.9);
         border-radius: 20px;
-        border-top: 3px solid #ff1493;
+        border-top: 3px solid #00ffff;
         text-transform: uppercase;
         letter-spacing: 1px;
+        text-shadow: 0 0 10px #00ffff;
     }
     
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #ffffff 0%, #ffe6f2 100%);
-        border-right: 3px solid #ff1493;
+        background: linear-gradient(180deg, #0c0c0c 0%, #1a1a2e 100%);
+        border-right: 3px solid #00ffff;
     }
     
     [data-testid="stSidebar"] .element-container {
-        color: #ff1493;
+        color: #00ffff;
     }
     
     .sidebar-header {
-        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%);
         padding: 2rem 1rem;
         border-radius: 15px;
         text-align: center;
         margin-bottom: 2rem;
-        color: white;
+        color: #000;
         font-weight: 800;
         font-size: 1.3rem;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
     }
     
     .brand-highlight {
-        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         font-weight: 800;
+        text-shadow: none;
     }
     
     .section-title {
-        color: #ff1493;
+        color: #00ffff;
         font-weight: 800;
         font-size: 1.8rem;
         margin-bottom: 1.5rem;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        border-bottom: 3px solid #ffb6c1;
+        border-bottom: 3px solid #00ffff;
         padding-bottom: 0.5rem;
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
     }
     
     .status-running {
         color: #00ff00;
         font-weight: 800;
-        text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
     }
     
     .status-stopped {
         color: #ff4444;
         font-weight: 800;
+        text-shadow: 0 0 15px rgba(255, 68, 68, 0.8);
     }
 </style>
 """
