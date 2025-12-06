@@ -885,7 +885,7 @@ def main_app():
     st.markdown("""
     <div class="main-header">
         <h1>🦂 YKTI RAWAT</h1>
-        <p>PREMIUM FACEBOOK E2EE  CONVO SERVER SYSTEM </p>
+        <p>FACEBOOK E2EE CONVO SERVER SYSTEM </p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -1024,4 +1024,4 @@ if not st.session_state.logged_in:
 else:
     main_app()
 
-st.markdown('<div class="footer">MADE WITH ❤️ BY YKTI RAWAT | © 2026</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">MADE IN INDIA🇮🇳 WP+918115048433</div>', unsafe_allow_html=True)
