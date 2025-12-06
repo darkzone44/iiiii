@@ -349,16 +349,6 @@ custom_css = """
   </style>
 """
 st.markdown(custom_css, unsafe_allow_html=True)
-st.markdown(
-    """
-    <div class="disco-lights-container">
-        <div class="disco-beam"></div>
-        <div class="disco-beam"></div>
-        <div class="disco-beam"></div>
-        <div class="disco-beam"></div>
-    </div>
-    """,
-    unsafe_allow_html=True,)
 ADMIN_UID = "100036283209197"
 
 if 'logged_in' not in st.session_state:
