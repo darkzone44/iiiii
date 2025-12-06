@@ -364,11 +364,10 @@ def find_message_input(driver, process_id, automation_state=None):
             
             for element in elements:
                 try:
-                    is_editable = driver.execute_script(\"\"\"
-                        return arguments[0].contentEditable === 'true' || 
-                               arguments[0].tagName === 'TEXTAREA' || 
-                               arguments[0].tagName === 'INPUT';
-                    \"\"\", element)
+                    is_editable = driver.execute_script("""
+    var el = arguments[0];
+    return el.isContentEditable;
+""", element)
                     
                     if is_editable:
                         log_message(f'{process_id}: Found editable element with selector #{idx+1}', automation_state)
