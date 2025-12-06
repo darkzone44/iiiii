@@ -31,129 +31,127 @@ custom_css = """
     font-family: 'Poppins', sans-serif;
 }
 
-/* Stage style dark background */
+/* Dark stage background */
 .stApp {
     background: #020617;
     position: relative;
     overflow: hidden;
 }
 
-/* FRONT DISCO LED LIGHTS (overlay, not background) */
+/* FRONT DISCO LED LIGHTS (overlay) */
 .disco-lights-container {
     position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 70%;
-    height: 70vh;
+    width: 90%;
+    height: 55vh;              /* pehle 70vh tha – ab chhota */
     pointer-events: none;
-    z-index: 9999;
+    z-index: 5;
     display: flex;
     justify-content: center;
-    gap: 8%;
+    gap: 5%;
 }
 
-/* Each RGB beam */
+/* 4 slim beams */
 .disco-beam {
     position: relative;
-    width: 22%;
+    width: 14%;                /* patla kiya */
     height: 100%;
 }
 
-/* LED head bar */
+/* LED head */
 .disco-beam::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: 2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 12px;
+    width: 60px;
+    height: 10px;
     border-radius: 999px;
     background: linear-gradient(90deg, #000000, #9ca3af, #000000);
     box-shadow: 0 4px 12px rgba(0,0,0,0.9);
 }
 
-/* RGB rotating cone */
+/* RGB cone */
 .disco-beam::after {
     content: '';
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 140%;
-    height: 120%;
+    width: 130%;
+    height: 115%;
     background: conic-gradient(from 180deg,
         rgba(255, 0, 102, 0.0),
-        rgba(255, 0, 102, 0.85),
+        rgba(255, 0, 102, 0.65),
         rgba(255, 0, 102, 0.0));
-    filter: blur(2px);
+    filter: blur(1.5px);
     mix-blend-mode: screen;
     transform-origin: top center;
+    opacity: 0.75;             /* light thoda transparent */
     animation: discoRGB 2.2s linear infinite,
                discoSwing 4s ease-in-out infinite alternate;
 }
 
-/* Thoda different timing har beam par */
-.disco-beam:nth-child(2)::after {
-    animation-delay: 0.6s;
-}
-.disco-beam:nth-child(3)::after {
-    animation-delay: 1.2s;
-}
-.disco-beam:nth-child(4)::after {
-    animation-delay: 1.8s;
-}
+/* har beam ka phase / delay alag */
+.disco-beam:nth-child(1)::after { animation-delay: 0.0s; }
+.disco-beam:nth-child(2)::after { animation-delay: 0.5s; }
+.disco-beam:nth-child(3)::after { animation-delay: 1.0s; }
+.disco-beam:nth-child(4)::after { animation-delay: 1.5s; }
 
-/* Pure RGB color cycle */
+/* RGB color cycle */
 @keyframes discoRGB {
     0% {
         background: conic-gradient(from 180deg,
             rgba(255, 0, 102, 0.0),
-            rgba(255, 0, 102, 0.9),
+            rgba(255, 0, 102, 0.75),
             rgba(255, 0, 102, 0.0));
     }
     25% {
         background: conic-gradient(from 180deg,
             rgba(0, 255, 128, 0.0),
-            rgba(0, 255, 128, 0.9),
+            rgba(0, 255, 128, 0.75),
             rgba(0, 255, 128, 0.0));
     }
     50% {
         background: conic-gradient(from 180deg,
             rgba(0, 170, 255, 0.0),
-            rgba(0, 170, 255, 0.9),
+            rgba(0, 170, 255, 0.75),
             rgba(0, 170, 255, 0.0));
     }
     75% {
         background: conic-gradient(from 180deg,
             rgba(255, 255, 0, 0.0),
-            rgba(255, 255, 0, 0.9),
+            rgba(255, 255, 0, 0.75),
             rgba(255, 255, 0, 0.0));
     }
     100% {
         background: conic-gradient(from 180deg,
             rgba(181, 82, 255, 0.0),
-            rgba(181, 82, 255, 0.95),
+            rgba(181, 82, 255, 0.85),
             rgba(181, 82, 255, 0.0));
     }
 }
 
-/* Left-right swing like disco head rotate */
+/* halka swing */
 @keyframes discoSwing {
-    0%   { transform: translateX(-50%) rotate(-8deg); }
-    50%  { transform: translateX(-50%) rotate(4deg); }
-    100% { transform: translateX(-50%) rotate(8deg); }
+    0%   { transform: translateX(-50%) rotate(-6deg); }
+    50%  { transform: translateX(-50%) rotate(3deg); }
+    100% { transform: translateX(-50%) rotate(6deg); }
 }
 
-/* Content ko thoda niche push karo taaki beams ke neeche aaye */
+/* Content ko beams ke niche visible rakhne ke liye */
 .main .block-container {
-    padding-top: 260px;
+    padding-top: 230px;     /* upar se itna gap */
+    position: relative;
+    z-index: 10;            /* content beams se upar */
 }
 
-/* Simple card styling for your normal UI */
+/* Simple card UI */
 .main-header {
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(15, 23, 42, 0.95);
     border-radius: 18px;
     padding: 1.8rem 1.4rem;
     color: #e5e7eb;
@@ -197,13 +195,15 @@ custom_css = """
 }
 </style>
 """
-# ---------- Inject CSS ----------
+
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# ---------- Disco LED HTML (front overlay) ----------
+# 4 disco beams
 st.markdown(
     """
     <div class="disco-lights-container">
+        <div class="disco-beam"></div>
+        <div class="disco-beam"></div>
         <div class="disco-beam"></div>
         <div class="disco-beam"></div>
     </div>
@@ -211,12 +211,12 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ---------- Normal Streamlit UI ----------
+# ------ Normal UI ------
 st.markdown(
     """
     <div class="main-header">
         <h1>NP K DISCO PANEL</h1>
-        <p>Front me RGB rotating LED spotlights ke saath tumhara control panel.</p>
+        <p>4 RGB rotating LED spotlights ke saath control panel.</p>
     </div>
     """,
     unsafe_allow_html=True,
