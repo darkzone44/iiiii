@@ -273,41 +273,170 @@ custom_css = """
     }
     
     .stTabs [data-baseweb="tab"] {
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 12px;
-        color: #333;
-        padding: 12px 25px;
-        font-weight: 600;
-        border: 2px solid transparent;
-        transition: all 0.3s ease;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #00ff00 0%, #00ffff 100%);
-        color: #000;
-        border-image: linear-gradient(45deg, #00ff00, #00ffff) 1;
-        transform: scale(1.05);
-    }
-    
-    .console-output {
-        background: #000 !important;
-        border: 1px solid #00ffff;
-        color: #00ff88 !important;
-    }
-    
-    .console-section {
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 15px;
-        border: 2px solid transparent;
-        animation: consoleBorder 2.5s linear infinite;
-    }
-    
-    @keyframes consoleBorder {
-        0% { border-image: linear-gradient(45deg, #00ffff, #ff00ff) 1; }
-        50% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
-        100% { border-image: linear-gradient(45deg, #00ffff, #ff00ff) 1; }
-    }
+custom_css = """
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Page background - premium dark gradient */
+.stApp {
+    background: radial-gradient(circle at top left, #1f2933 0%, #111827 45%, #020617 100%);
+    background-attachment: fixed;
+}
+
+/* Main container - glass card */
+.main .block-container {
+    background: rgba(15, 23, 42, 0.88) !important;
+    border-radius: 24px;
+    padding: 28px 22px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.7),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(18px);
+}
+.main .block-container::before {
+    content: none;
+}
+
+/* Header card */
+.main-header {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9)) !important;
+    padding: 2.2rem 1.8rem;
+    border-radius: 22px;
+    margin-bottom: 2.3rem;
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.85);
+    position: relative;
+    overflow: hidden;
+}
+
+.main-header::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.38), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.35), transparent 60%);
+    opacity: 0.9;
+}
+
+.main-header h1 {
+    background: linear-gradient(120deg, #e5e7eb, #f97316);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+.main-header p {
+    color: #9ca3af;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-top: 0.7rem;
+}
+
+/* Buttons - clean accent */
+.stButton>button {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #0f172a !important;
+    border-radius: 999px;
+    border: none;
+    padding: 0.7rem 1.8rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.35);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+.stButton>button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 35px rgba(34, 197, 94, 0.45);
+    filter: brightness(1.03);
+}
+
+/* Inputs */
+.stTextInput>div>div>input,
+.stTextArea>div>div>textarea,
+.stNumberInput>div>div>input {
+    background: rgba(15, 23, 42, 0.9) !important;
+    border-radius: 12px;
+    border: 1px solid rgba(55, 65, 81, 0.9);
+    color: #e5e7eb !important;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+}
+
+.stTextInput>div>div>input:focus,
+.stTextArea>div>div>textarea:focus,
+.stNumberInput>div>div>input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.6);
+    outline: none;
+}
+
+/* Labels */
+label {
+    color: #9ca3af !important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: rgba(15, 23, 42, 0.96) !important;
+    border-right: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    background: rgba(15, 23, 42, 0.95);
+    gap: 8px;
+    padding: 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(55, 65, 81, 0.9);
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: transparent;
+    border-radius: 10px;
+    color: #9ca3af;
+    padding: 8px 18px;
+    font-weight: 500;
+    border: none;
+}
+
+.stTabs [aria-selected="true"] {
+    background: rgba(15, 23, 42, 0.4);
+    color: #e5e7eb;
+    box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.7);
+}
+
+/* Console section */
+.console-section {
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 15px;
+    border: 1px solid rgba(55, 65, 81, 0.95);
+}
+
+.console-output {
+    background: #020617 !important;
+    border: 1px solid rgba(30, 64, 175, 0.8);
+    color: #22c55e !important;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 0.8rem;
+}
 </style>
+"""
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
