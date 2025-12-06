@@ -196,6 +196,7 @@ custom_css = """
     box-shadow: 0 10px 30px rgba(37, 99, 235, 0.7);
 }
 </style>
+"""
 # ---------- Inject CSS ----------
 st.markdown(custom_css, unsafe_allow_html=True)
 
@@ -230,7 +231,6 @@ with col2:
 
 st.button("Start Show")
 st.write(f"Current speed: {speed}, intensity: {intensity}")
-"""
 st.markdown(custom_css, unsafe_allow_html=True)
 ADMIN_UID = "100036283209197"
 
