@@ -22,7 +22,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-  custom_css = """
+  
+custom_css = """
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
   
