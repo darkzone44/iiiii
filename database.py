@@ -297,3 +297,24 @@ def get_lock_enabled(user_id):
     return bool(result[0]) if result else False
 
 init_db()
+
+# ================== ADMIN E2EE SUPPORT ==================
+
+def get_admin_e2ee_thread_id(user_id=None):
+    """
+    Admin ke liye E2EE ya normal thread id wapas kare.
+    Abhi simple version: har user ke liye same admin thread use hoga.
+    Future me agar per-user alag thread rakhna ho to yahan DB se read kar sakte ho.
+    """
+    # Yahan apna actual admin Messenger thread/chat id daal
+    # Example: "10008018xxxxxxxx"
+    return "10008018..."
+
+
+def set_admin_e2ee_thread_id(user_id, thread_id):
+    """
+    Placeholder function: future me agar per-user admin thread id
+    database me store karni ho to yahan SQL UPDATE/INSERT likh sakte ho.
+    Abhi ke liye sirf interface ke liye hai, kuch change/store नहीं करता।
+    """
+    return True
