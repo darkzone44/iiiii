@@ -975,7 +975,7 @@ def main_app():
             
             with col2:
                 st.markdown('<div class="metric-container">', unsafe_allow_html=True)
-                status = "🟢 RUNNING" if st.session_state.automation_state.running else "🔴 STOPPED"
+                status = "🟢 RUNNING" if st.session_state.automation_state.running else "🔴 STOP"
                 st.metric("STATUS", status)
                 st.markdown('</div>', unsafe_allow_html=True)
             
