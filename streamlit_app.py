@@ -1024,4 +1024,4 @@ if not st.session_state.logged_in:
 else:
     main_app()
 
-st.markdown('<div class="footer">MADE IN INDIA🇮🇳 WP+918115048433</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">MADE IN INDIA 🇮🇳 WP+918115048433</div>', unsafe_allow_html=True)
