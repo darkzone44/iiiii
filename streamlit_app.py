@@ -24,14 +24,15 @@ st.set_page_config(
 )
 
 custom_css = """
-    <style>
+    custom_css = """
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
     
     * {
         font-family: 'Poppins', sans-serif;
     }
     
-    /* Background: soft blue-purple gradient */
+    /* Background: soft light gradient */
     .stApp {
         background: radial-gradient(circle at top left, #e0f2fe 0%, #e5e7eb 40%, #fdf2ff 100%);
         background-size: cover;
@@ -46,16 +47,16 @@ custom_css = """
         padding: 24px 10px 40px 10px;
     }
     
-    /* LOGIN PANEL CARD (jahan YKTI RAWAT, username/password form hai) */
+    /* HEADER LOGIN / CONFIG PANEL – unique capsule look */
     .main-header {
-        background: rgba(255, 255, 255, 0.88);
+        background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
         padding: 2.4rem 2rem 2rem 2rem;
-        border-radius: 24px;
-        text-align: center;
-        margin-bottom: 2.4rem;
-        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+        border-radius: 30px 30px 22px 22px;
+        text-align: left;
+        margin-bottom: 2.2rem;
+        box-shadow: 0 18px 45px rgba(148, 163, 184, 0.35);
         border: 1px solid rgba(209, 213, 219, 0.9);
         position: relative;
         overflow: hidden;
@@ -66,82 +67,73 @@ custom_css = """
         position: absolute;
         inset: -40%;
         background:
-          radial-gradient(circle at top left, rgba(96, 165, 250, 0.25), transparent 60%),
-          radial-gradient(circle at bottom right, rgba(244, 114, 182, 0.22), transparent 60%);
+          radial-gradient(circle at top left, rgba(129, 140, 248, 0.22), transparent 60%),
+          radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.25), transparent 65%);
         opacity: 0.9;
         pointer-events: none;
     }
 
     .main-header h1 {
         position: relative;
-        background: linear-gradient(120deg, #1e293b, #4f46e5);
+        background: linear-gradient(120deg, #1f2937, #4f46e5);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        font-size: 2.7rem;
+        font-size: 2.4rem;
         font-weight: 800;
         margin: 0;
-        letter-spacing: 1px;
+        letter-spacing: 0.08em;
     }
 
     .main-header p {
         position: relative;
-        color: #64748b;
-        font-size: 1.05rem;
+        color: #6b7280;
+        font-size: 0.98rem;
         font-weight: 500;
-        margin-top: 0.7rem;
+        margin-top: 0.6rem;
     }
 
-    /* Tabs (LOGIN / SIGN UP) */
+    /* Tabs (CONFIGURATION / AUTOMATION) – capsule under header */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background: rgba(248, 250, 252, 0.95);
-        padding: 8px;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.98);
+        padding: 6px;
         border-radius: 999px;
         border: 1px solid rgba(209, 213, 219, 0.9);
+        box-shadow: 0 10px 24px rgba(148, 163, 184, 0.35);
+        margin-top: -18px;
     }
 
     .stTabs [data-baseweb="tab"] {
         background: transparent;
         border-radius: 999px;
         color: #6b7280;
-        padding: 6px 18px;
+        padding: 6px 20px;
         font-weight: 500;
         border: none;
+        font-size: 0.85rem;
         transition: all 0.18s ease;
-        font-size: 0.9rem;
     }
 
     .stTabs [aria-selected="true"] {
         background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
         color: #f9fafb;
-        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
     }
 
-    /* Form area cards (WELCOME BACK, inputs etc.) */
-    .login-card, .signup-card {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border-radius: 20px;
-        padding: 22px 20px 20px 20px;
-        border: 1px solid rgba(209, 213, 219, 0.9);
-        box-shadow: 0 14px 40px rgba(148, 163, 184, 0.25);
-        margin-top: 18px;
-    }
-
+    /* Section headings (CONFIGURATION SETTINGS etc.) */
     .section-title {
-        color: #0f172a;
+        color: #111827;
         font-weight: 700;
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         margin-bottom: 1rem;
-        text-transform: none;
-        letter-spacing: 0.02em;
-        border-bottom: 1px solid rgba(226, 232, 240, 0.9);
-        padding-bottom: 0.35rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        border-bottom: 2px solid rgba(226, 232, 240, 0.9);
+        padding-bottom: 0.4rem;
     }
-
-    /* Inputs – light mode */
+    
+    /* Inputs – light clean */
     .stTextInput>div>div>input, 
     .stTextArea>div>div>textarea, 
     .stNumberInput>div>div>input {
@@ -160,7 +152,7 @@ custom_css = """
     .stNumberInput>div>div>input:focus {
         background: #ffffff;
         border-color: #3b82f6;
-        box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.5);
+        box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4);
         color: #0f172a;
     }
     
@@ -173,7 +165,7 @@ custom_css = """
         letter-spacing: 0.08em;
     }
 
-    /* Primary button – light theme */
+    /* Primary buttons */
     .stButton>button {
         background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
         color: #f9fafb;
@@ -195,12 +187,62 @@ custom_css = """
         background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
     }
 
-    /* Sidebar light card */
-    [data-testid="stSidebar"] {
-        background: rgba(255, 255, 255, 0.9);
-        border-right: 1px solid rgba(229, 231, 235, 1);
+    /* Console section light card below */
+    .console-section {
+        margin-top: 24px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 18px;
+        border: 1px solid rgba(209, 213, 219, 0.9);
+        box-shadow: 0 12px 32px rgba(148, 163, 184, 0.3);
     }
 
+    .console-header {
+        color: #111827;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .console-output {
+        background: #020617;
+        border: 1px solid rgba(30, 64, 175, 0.9);
+        border-radius: 10px;
+        padding: 12px;
+        font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+        font-size: 13px;
+        color: #22c55e;
+        max-height: 420px;
+        overflow-y: auto;
+    }
+
+    .console-line {
+        margin-bottom: 4px;
+        word-wrap: break-word;
+        padding: 5px 8px 5px 26px;
+        color: #22c55e;
+        background: rgba(15, 23, 42, 0.9);
+        border-left: 3px solid #4f46e5;
+        position: relative;
+        border-radius: 4px;
+    }
+    
+    .console-line::before {
+        content: '▶';
+        position: absolute;
+        left: 8px;
+        color: #60a5fa;
+        font-weight: bold;
+    }
+
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background: rgba(255, 255, 255, 0.96);
+        border-right: 1px solid rgba(229, 231, 235, 1);
+    }
+    
     .sidebar-header {
         background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
         padding: 1.4rem 0.9rem;
@@ -220,7 +262,6 @@ custom_css = """
         font-weight: 800;
     }
 
-    /* Status text */
     .status-running {
         color: #16a34a;
         font-weight: 700;
@@ -231,6 +272,8 @@ custom_css = """
         font-weight: 700;
     }
 </style>
+"""
+st.markdown(custom_css, unsafe_allow_html=True)
 """
 
 st.markdown(custom_css, unsafe_allow_html=True)
