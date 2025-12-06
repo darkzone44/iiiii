@@ -24,200 +24,176 @@ st.set_page_config(
 )
 custom_css = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Outfit', sans-serif !important;
 }
 
-/* DARK NEON BACKGROUND */
+/* 📌 LIGHT BEAUTIFUL BACKGROUND */
 .stApp {
-    background: radial-gradient(circle at top, #0e0e1a 0%, #000000 100%);
+    background: linear-gradient(135deg, #f4f9ff 0%, #e9f3ff 40%, #e1f0ff 100%);
     background-attachment: fixed;
-    color: #e0e0e0 !important;
+    color: #333 !important;
 }
 
-/* MAIN CONTAINER – GLASS CARD */
+/* 📌 MAIN CONTAINER – PREMIUM TILE BOX */
 .main .block-container {
-    background: rgba(20, 20, 30, 0.6);
-    backdrop-filter: blur(18px);
-    border-radius: 20px;
-    padding: 35px;
-    border: 1.5px solid rgba(0, 255, 180, 0.15);
-    box-shadow: 0 0 30px rgba(0, 255, 180, 0.15);
-    animation: fadeSlide 0.7s ease-in-out;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 28px;
+    padding: 40px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    animation: smoothFade 0.5s ease;
 }
 
-@keyframes fadeSlide {
-    from {opacity:0; transform: translateY(20px);}
-    to {opacity:1; transform: translateY(0);}
+@keyframes smoothFade {
+    from {opacity: 0; transform: translateY(12px);}
+    to {opacity: 1; transform: translateY(0);}
 }
 
-/* HEADER */
+/* 📌 HEADER MODERN TILE */
 .main-header {
-    background: linear-gradient(135deg, #00ffaa33 0%, #00ffc899 50%, #00e6ff55 100%);
-    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #ffffff, #f0f8ff, #e7f3ff);
     border-radius: 25px;
+    padding: 50px 25px;
     text-align: center;
-    box-shadow: 0 0 40px rgba(0,255,200,0.25);
-    border: 1.5px solid rgba(0,255,180,0.25);
-    position: relative;
-    overflow: hidden;
-}
-
-/* Shine Animation */
-.main-header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, transparent 20%, rgba(255,255,255,0.15) 50%, transparent 80%);
-    animation: shine 3s infinite;
-}
-@keyframes shine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    box-shadow: 0 10px 30px rgba(0, 140, 255, 0.12);
+    border: 1px solid rgba(0, 140, 255, 0.15);
 }
 
 .main-header h1 {
-    color: #00ffcc;
+    color: #0077ff;
     font-size: 3rem;
-    font-weight: 800;
-    text-shadow: 0 0 12px #00ffcc;
+    font-weight: 900;
 }
 
 .main-header p {
-    color: #baffff;
-    font-size: 1.3rem;
+    color: #005fcc;
+    font-size: 1.2rem;
+    opacity: 0.85;
 }
 
-/* INPUT FIELDS */
+/* 📌 INPUT FIELDS */
 .stTextInput>div>div>input,
-.stTextArea>div>div>textarea,
-.stNumberInput>div>div>input {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1.5px solid rgba(0, 255, 200, 0.3);
-    border-radius: 10px;
-    padding: 12px;
-    color: #baffff;
+.stTextArea>div>div>textarea {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 14px;
+    border: 1.5px solid #cfe4ff;
+    color: #333;
     font-size: 1rem;
-}
-.stTextInput>div>div>input:focus {
-    border-color: #00ffcc;
-    box-shadow: 0 0 10px #00ffcc55;
+    transition: 0.2s ease;
 }
 
-/* LABELS */
+.stTextInput>div>div>input:focus {
+    border-color: #0078ff;
+    box-shadow: 0 0 12px rgba(0,120,255,0.3);
+}
+
 label {
-    color: #00ffcc !important;
+    color: #006be8 !important;
     font-weight: 700 !important;
 }
 
-/* BUTTON */
+/* 📌 BUTTON — PREMIUM GLOSSY */
 .stButton>button {
-    background: linear-gradient(135deg, #00ffcc 0%, #0099ff 100%);
-    color: black;
-    font-weight: 800;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    letter-spacing: 1px;
-    border: none;
+    background: linear-gradient(135deg, #009dff 0%, #006bff 100%);
+    color: white;
+    font-weight: 700;
     font-size: 1.1rem;
+    padding: 1rem 2rem;
+    border-radius: 14px;
+    border: none;
     transition: 0.3s ease;
-    box-shadow: 0 0 20px #00ffcc55;
+    box-shadow: 0 10px 20px rgba(0,100,255,0.25);
 }
 .stButton>button:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 25px #00eaffaa;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,100,255,0.35);
 }
 
-/* TABS */
-.stTabs [data-baseweb="tab"] {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1.5px solid rgba(0,255,200,0.2);
-    color: #84ffff;
-    border-radius: 12px;
-    padding: 12px 25px;
-}
-.stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, #00ffcc 0%, #0099ff 100%);
-    color: black;
-    box-shadow: 0 0 15px #00ffc855;
-}
-
-/* METRICS */
-[data-testid="stMetricValue"] {
-    color: #00ffcc;
-    font-weight: 900;
-    text-shadow: 0 0 10px #00ffcc;
-}
-[data-testid="stMetricLabel"] {
-    color: #66ffff;
-    font-weight: 600;
-}
-
-/* CONSOLE SECTION */
-.console-section {
-    background: rgba(0,0,0,0.45);
-    border: 1.5px solid #00ffcc55;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 25px #00ffcc33;
-}
-
-.console-header {
-    color: #00ffcc;
-    font-weight: 800;
-    text-align: center;
-    font-size: 1.4rem;
-}
-
-/* TERMINAL OUTPUT */
-.console-output {
-    background: #000000;
-    border: 1.5px solid #00ffcc55;
-    padding: 15px;
-    border-radius: 10px;
-    color: #00ff88;
-    font-family: 'Courier New';
-    max-height: 450px;
-    overflow-y: auto;
-}
-
-/* CONSOLE LINES */
-.console-line {
+/* 📌 TABS – CLEAN WHITE */
+.stTabs [data-baseweb="tab-list"] {
+    background: #ffffff;
+    border-radius: 16px;
     padding: 8px;
-    margin-bottom: 6px;
-    background: rgba(0,255,200,0.05);
-    border-left: 3px solid #00ffcc;
-    border-radius: 5px;
 }
 
-/* SUCCESS + ERROR BOX */
-.success-box {
-    background: linear-gradient(135deg, #00ffcc55, #00ccff55);
-    padding: 1.2rem;
+.stTabs [data-baseweb="tab"] {
+    background: #f4f9ff;
     border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: 600;
+    color: #0077ff;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.stTabs [aria-selected="true"] {
+    background: #0077ff;
+    color: white;
+    box-shadow: 0 0 14px rgba(0,100,255,0.4);
+}
+
+/* 📌 ICON STYLING – PREMIUM LOOK */
+i, svg {
+    width: 26px !important;
+    height: 26px !important;
+    padding: 10px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffffff, #eaf3ff);
+    box-shadow: 0 4px 15px rgba(0,100,255,0.2);
+    border: 1px solid rgba(0, 120, 255, 0.15);
+    fill: #006bff !important;
+}
+
+/* 📌 CONSOLE */
+.console-output {
+    background: #ffffff;
+    border: 2px solid #b7d9ff;
+    border-radius: 15px;
+    padding: 20px;
+    font-family: "Consolas";
+    max-height: 400px;
+    color: #005fcc;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0,100,255,0.15);
+}
+
+.console-line {
+    background: #eef6ff;
+    padding: 10px;
+    border-left: 4px solid #0077ff;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+/* 📌 SUCCESS / ERROR BOX */
+.success-box {
+    background: linear-gradient(135deg, #c7ffea, #9dffe0);
+    border-radius: 12px;
+    padding: 18px;
     text-align: center;
-    color: #00ffee;
+    color: #007f5b;
     font-weight: 700;
 }
 .error-box {
-    background: linear-gradient(135deg, #ff444455, #ffbb3344);
-    padding: 1.2rem;
+    background: linear-gradient(135deg, #ffe1e1, #ffd4d4);
     border-radius: 12px;
+    padding: 18px;
     text-align: center;
-    color: #ffdddd;
+    color: #b10000;
     font-weight: 700;
 }
 
-/* FOOTER */
+/* 📌 FOOTER */
 .footer {
     text-align: center;
-    padding: 1.5rem;
-    color: #00ffcc;
+    color: #0077ff;
     font-weight: 800;
-    margin-top: 3rem;
-    border-top: 1px solid #00ffcc55;
+    margin-top: 2rem;
+    padding: 1.5rem;
 }
 </style>
 """
