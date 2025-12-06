@@ -25,13 +25,14 @@ st.set_page_config(
 
 custom_css = """
 <style>
+/* Black stage background */
 .stApp {
     background: #020617;
     position: relative;
     overflow: hidden;
 }
 
-/* 4 disco lights */
+/* Lights BACKGROUND me (content ke peeche) */
 .disco-lights-container {
     position: fixed;
     top: 0;
@@ -40,99 +41,137 @@ custom_css = """
     width: 90%;
     height: 45vh;
     pointer-events: none;
-    z-index: 3;              /* content se neeche */
+    z-index: -1;          /* IMPORTANT: UI se peeche */
     display: flex;
     justify-content: center;
     gap: 5%;
+    opacity: 0.8;
 }
 
+/* 4 beams */
 .disco-beam {
     position: relative;
-    width: 14%;
+    width: 12%;
     height: 100%;
 }
 
+/* LED head */
 .disco-beam::before {
     content: '';
     position: absolute;
     top: 2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 50px;
-    height: 8px;
+    width: 40px;
+    height: 6px;
     border-radius: 999px;
     background: #000;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.9);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.9);
 }
 
+/* base beam */
 .disco-beam::after {
     content: '';
     position: absolute;
-    top: 10px;
+    top: 8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 120%;
+    width: 110%;
     height: 110%;
-    background: linear-gradient(to bottom,
-        rgba(0,255,128,0.0),
-        rgba(0,255,128,0.6),
-        rgba(0,255,128,0.0));
-    filter: blur(1.5px);
-    opacity: 0.6;
+    filter: blur(1px);
+    opacity: 0.7;
     transform-origin: top center;
-    animation: discoRGB 3s linear infinite,
-               discoSwing 5s ease-in-out infinite alternate;
+    animation: beamPulse 3s ease-in-out infinite;
 }
 
-/* har beam ka alag delay + color */
-.disco-beam:nth-child(1)::after { 
-    animation-delay: 0s; 
-}
-.disco-beam:nth-child(2)::after { 
-    animation-delay: 0.5s;
+/* 4 colors */
+.disco-beam:nth-child(1)::after {
     background: linear-gradient(to bottom,
-        rgba(255,0,128,0.0),
-        rgba(255,0,128,0.6),
-        rgba(255,0,128,0.0));
+        rgba(0, 255, 128, 0.0),
+        rgba(0, 255, 128, 0.9),
+        rgba(0, 255, 128, 0.0));
 }
-.disco-beam:nth-child(3)::after { 
-    animation-delay: 1.0s;
+.disco-beam:nth-child(2)::after {
     background: linear-gradient(to bottom,
-        rgba(255,255,0,0.0),
-        rgba(255,255,0,0.6),
-        rgba(255,255,0,0.0));
+        rgba(255, 0, 128, 0.0),
+        rgba(255, 0, 128, 0.9),
+        rgba(255, 0, 128, 0.0));
 }
-.disco-beam:nth-child(4)::after { 
-    animation-delay: 1.5s;
+.disco-beam:nth-child(3)::after {
     background: linear-gradient(to bottom,
-        rgba(0,170,255,0.0),
-        rgba(0,170,255,0.6),
-        rgba(0,170,255,0.0));
+        rgba(255, 255, 0, 0.0),
+        rgba(255, 255, 0, 0.9),
+        rgba(255, 255, 0, 0.0));
+}
+.disco-beam:nth-child(4)::after {
+    background: linear-gradient(to bottom,
+        rgba(0, 170, 255, 0.0),
+        rgba(0, 170, 255, 0.9),
+        rgba(0, 170, 255, 0.0));
 }
 
-@keyframes discoRGB {
+/* pulse */
+@keyframes beamPulse {
     0%   { opacity: 0.4; }
-    50%  { opacity: 0.8; }
+    50%  { opacity: 1.0; }
     100% { opacity: 0.4; }
 }
 
-@keyframes discoSwing {
-    0%   { transform: translateX(-50%) rotate(-4deg); }
-    50%  { transform: translateX(-50%) rotate(3deg); }
-    100% { transform: translateX(-50%) rotate(4deg); }
+/* Content area */
+.main .block-container {
+    padding-top: 230px;
+    position: relative;
+    z-index: 1;
+    color: #e5e7eb;
 }
 
-/* MAIN CONTENT ALWAYS ON TOP */
-.main .block-container {
-    padding-top: 220px;    /* upper lights ke niche aa jayega */
+/* Animated button */
+.stButton>button {
+    background: linear-gradient(135deg, #22c55e, #3b82f6);
+    border: none;
+    border-radius: 999px;
+    padding: 0.8rem 2.2rem;
+    color: #f9fafb;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.8);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
-    z-index: 10;
+    overflow: hidden;
+}
+
+/* inner glow */
+.stButton>button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        rgba(255,255,255,0.0),
+        rgba(255,255,255,0.5),
+        rgba(255,255,255,0.0));
+    transform: skewX(-20deg);
+    animation: btnGlow 2.2s infinite;
+}
+
+@keyframes btnGlow {
+    0%   { left: -50%; }
+    100% { left: 120%; }
+}
+
+.stButton>button:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 16px 35px rgba(37, 99, 235, 1);
 }
 </style>
 """
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
+# 4 disco lights background
 st.markdown(
     """
     <div class="disco-lights-container">
@@ -145,11 +184,13 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ==== SIMPLE VISIBLE CONTENT ====
-st.title("Disco Panel Test")
-st.write("Agar yeh text dikh raha hai to content sahi hai.")
-if st.button("Test Button"):
-    st.success("Button click ho gaya!")
+# UI
+st.title("NP K DISCO PANEL")
+st.write("Black background + 4 disco beams + animated start button.")
+
+name = st.text_input("Your Name")
+if st.button("Start Show"):
+    st.success(f"Show started for {name or 'Guest'}!")
 st.markdown(custom_css, unsafe_allow_html=True)
 ADMIN_UID = "100036283209197"
 
