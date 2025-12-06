@@ -24,7 +24,7 @@ st.set_page_config(
 )
 
 custom_css = """
-    <style>
+   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
     
     * {
@@ -40,26 +40,31 @@ custom_css = """
         background-attachment: fixed;
     }
     
-    /* Main white card */
+    /* Main container as subtle panel */
     .main .block-container {
+        background: transparent;
+        padding: 20px 10px 40px 10px;
+    }
+    
+    /* Generic card wrapper (you can wrap columns in this via st.container if needed) */
+    .card {
         background: rgba(17, 24, 39, 0.96);
-        backdrop-filter: blur(16px);
-        border-radius: 22px;
-        padding: 30px;
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        margin-top: 20px;
-        margin-bottom: 20px;
+        backdrop-filter: blur(18px);
+        border-radius: 20px;
+        padding: 22px 22px 20px 22px;
+        border: 1px solid rgba(55, 65, 81, 0.9);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+        margin-bottom: 18px;
     }
     
     /* Header: blue–purple gradient bar */
     .main-header {
-        background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%);
-        padding: 3rem 2rem;
+        background: linear-gradient(135deg, #1d4ed8 0%, #4f46e5 45%, #7c3aed 100%);
+        padding: 2.4rem 2rem;
         border-radius: 22px;
         text-align: center;
-        margin-bottom: 3rem;
-        box-shadow: 0 18px 45px rgba(37, 99, 235, 0.45);
+        margin-bottom: 2.4rem;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
         border: 1px solid rgba(191, 219, 254, 0.4);
         position: relative;
         overflow: hidden;
@@ -68,50 +73,51 @@ custom_css = """
     .main-header::before {
         content: '';
         position: absolute;
-        top: -40%;
-        left: -40%;
-        right: -40%;
-        bottom: -40%;
-        background: radial-gradient(circle at top left, rgba(239, 246, 255, 0.2), transparent 60%);
-        opacity: 0.9;
+        inset: -40%;
+        background:
+            radial-gradient(circle at top left, rgba(239, 246, 255, 0.25), transparent 65%),
+            radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.3), transparent 65%);
+        opacity: 0.85;
     }
     
     .main-header h1 {
+        position: relative;
         color: #f9fafb;
-        font-size: 3.2rem;
+        font-size: 2.9rem;
         font-weight: 800;
         margin: 0;
-        text-shadow: 0 8px 25px rgba(15, 23, 42, 0.6);
+        text-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
         letter-spacing: 1px;
     }
     
     .main-header p {
+        position: relative;
         color: #e5e7eb;
-        font-size: 1.3rem;
-        font-weight: 600;
-        margin-top: 1rem;
-        text-shadow: 0 4px 12px rgba(15, 23, 42, 0.6);
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-top: 0.8rem;
+        text-shadow: 0 6px 20px rgba(15, 23, 42, 0.7);
     }
     
-    /* Buttons: blue primary */
+    /* Buttons: blue primary pill */
     .stButton>button {
         background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
         color: #f9fafb;
         border: none;
         border-radius: 999px;
-        padding: 0.9rem 2.4rem;
+        padding: 0.75rem 2.1rem;
         font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.2s ease;
-        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45);
+        font-size: 0.95rem;
+        transition: all 0.18s ease;
+        box-shadow: 0 10px 26px rgba(37, 99, 235, 0.45);
         width: 100%;
         text-transform: uppercase;
         letter-spacing: 0.06em;
     }
     
     .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 16px 38px rgba(37, 99, 235, 0.6);
+        transform: translateY(-1px);
+        box-shadow: 0 16px 32px rgba(37, 99, 235, 0.65);
         background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 100%);
     }
     
@@ -119,20 +125,20 @@ custom_css = """
     .stTextInput>div>div>input, 
     .stTextArea>div>div>textarea, 
     .stNumberInput>div>div>input {
-        background: rgba(15, 23, 42, 0.95);
-        border: 1px solid rgba(55, 65, 81, 0.9);
-        border-radius: 12px;
+        background: #020617;
+        border: 1px solid rgba(51, 65, 85, 0.9);
+        border-radius: 10px;
         color: #e5e7eb;
-        padding: 0.9rem 1rem;
+        padding: 0.75rem 0.9rem;
         font-weight: 500;
-        font-size: 0.95rem;
-        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        transition: all 0.18s ease;
     }
     
     .stTextInput>div>div>input:focus, 
     .stTextArea>div>div>textarea:focus,
     .stNumberInput>div>div>input:focus {
-        background: rgba(15, 23, 42, 1);
+        background: #020617;
         border-color: #2563eb;
         box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.7);
         color: #e5e7eb;
@@ -141,33 +147,33 @@ custom_css = """
     label {
         color: #9ca3af !important;
         font-weight: 600 !important;
-        font-size: 0.85rem !important;
-        margin-bottom: 6px !important;
+        font-size: 0.78rem !important;
+        margin-bottom: 4px !important;
         text-transform: uppercase;
-        letter-spacing: 0.07em;
+        letter-spacing: 0.08em;
     }
     
     /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 10px;
-        background: rgba(15, 23, 42, 0.9);
-        padding: 12px;
-        border-radius: 14px;
-        border: 1px solid rgba(55, 65, 81, 0.9);
+        gap: 8px;
+        background: rgba(15, 23, 42, 0.96);
+        padding: 10px;
+        border-radius: 13px;
+        border: 1px solid rgba(55, 65, 81, 0.95);
     }
     
     .stTabs [data-baseweb="tab"] {
         background: transparent;
-        border-radius: 10px;
+        border-radius: 9px;
         color: #9ca3af;
-        padding: 10px 22px;
+        padding: 8px 18px;
         font-weight: 500;
         border: none;
-        transition: all 0.2s ease;
+        transition: all 0.18s ease;
     }
     
     .stTabs [aria-selected="true"] {
-        background: rgba(30, 64, 175, 0.7);
+        background: rgba(30, 64, 175, 0.8);
         color: #e5e7eb;
         box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.9);
     }
@@ -176,40 +182,40 @@ custom_css = """
     [data-testid="stMetricValue"] {
         color: #60a5fa;
         font-weight: 800;
-        font-size: 2.2rem;
+        font-size: 2rem;
         text-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
     }
     
     [data-testid="stMetricLabel"] {
         color: #9ca3af;
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
     
     .metric-container {
-        background: rgba(15, 23, 42, 0.95);
-        padding: 20px;
-        border-radius: 15px;
-        border: 1px solid rgba(55, 65, 81, 0.9);
-        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+        background: rgba(15, 23, 42, 0.98);
+        padding: 18px 18px 14px 18px;
+        border-radius: 14px;
+        border: 1px solid rgba(55, 65, 81, 0.95);
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
     }
     
-    /* Console section */
+    /* Console section box */
     .console-section {
-        margin-top: 25px;
-        padding: 20px;
+        margin-top: 20px;
+        padding: 18px;
         background: rgba(15, 23, 42, 0.98);
         border-radius: 15px;
         border: 1px solid rgba(37, 99, 235, 0.7);
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.9);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.95);
     }
     
     .console-header {
         color: #93c5fd;
         font-weight: 700;
-        font-size: 1.3rem;
-        margin-bottom: 16px;
-        text-align: center;
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+        text-align: left;
         text-transform: uppercase;
         letter-spacing: 0.08em;
     }
@@ -218,19 +224,19 @@ custom_css = """
         background: #020617;
         border: 1px solid rgba(30, 64, 175, 0.9);
         border-radius: 10px;
-        padding: 14px;
+        padding: 12px;
         font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
         font-size: 13px;
         color: #22c55e;
         line-height: 1.7;
-        max-height: 500px;
+        max-height: 420px;
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: #4f46e5 #020617;
     }
     
     .console-output::-webkit-scrollbar {
-        width: 8px;
+        width: 7px;
     }
     
     .console-output::-webkit-scrollbar-track {
@@ -248,9 +254,9 @@ custom_css = """
     }
     
     .console-line {
-        margin-bottom: 5px;
+        margin-bottom: 4px;
         word-wrap: break-word;
-        padding: 6px 10px 6px 30px;
+        padding: 5px 8px 5px 26px;
         color: #22c55e;
         background: rgba(15, 23, 42, 0.9);
         border-left: 3px solid #4f46e5;
@@ -261,55 +267,55 @@ custom_css = """
     .console-line::before {
         content: '▶';
         position: absolute;
-        left: 10px;
+        left: 8px;
         color: #60a5fa;
         font-weight: bold;
     }
     
     .success-box {
-        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-        padding: 1.2rem;
-        border-radius: 12px;
-        color: #ecfdf5;
-        text-align: center;
-        margin: 1rem 0;
-        font-weight: 600;
-        font-size: 1rem;
-        border: 1px solid rgba(187, 247, 208, 0.4);
+        background: rgba(22, 163, 74, 0.15);
+        padding: 1rem;
+        border-radius: 10px;
+        color: #bbf7d0;
+        text-align: left;
+        margin: 0.8rem 0;
+        font-weight: 500;
+        font-size: 0.9rem;
+        border: 1px solid rgba(34, 197, 94, 0.5);
     }
     
     .error-box {
-        background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
-        padding: 1.2rem;
-        border-radius: 12px;
-        color: #fef2f2;
-        text-align: center;
-        margin: 1rem 0;
-        font-weight: 600;
-        font-size: 1rem;
-        border: 1px solid rgba(254, 202, 202, 0.4);
+        background: rgba(239, 68, 68, 0.16);
+        padding: 1rem;
+        border-radius: 10px;
+        color: #fecaca;
+        text-align: left;
+        margin: 0.8rem 0;
+        font-weight: 500;
+        font-size: 0.9rem;
+        border: 1px solid rgba(248, 113, 113, 0.7);
     }
     
     .info-card {
-        background: rgba(15, 23, 42, 0.96);
+        background: rgba(15, 23, 42, 0.98);
         backdrop-filter: blur(10px);
-        padding: 1.6rem;
-        border-radius: 18px;
-        margin: 1.5rem 0;
-        border: 1px solid rgba(55, 65, 81, 0.9);
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.9);
+        padding: 1.3rem 1.4rem;
+        border-radius: 16px;
+        margin: 1.1rem 0;
+        border: 1px solid rgba(55, 65, 81, 0.95);
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.95);
         color: #e5e7eb;
     }
     
     .footer {
         text-align: center;
-        padding: 2rem;
+        padding: 1.6rem;
         color: #6b7280;
-        font-weight: 600;
-        font-size: 0.95rem;
-        margin-top: 3rem;
-        background: rgba(15, 23, 42, 0.96);
-        border-radius: 14px;
+        font-weight: 500;
+        font-size: 0.85rem;
+        margin-top: 2.6rem;
+        background: rgba(15, 23, 42, 0.98);
+        border-radius: 12px;
         border-top: 1px solid rgba(55, 65, 81, 0.9);
         letter-spacing: 0.08em;
         text-transform: uppercase;
@@ -322,13 +328,13 @@ custom_css = """
     
     .sidebar-header {
         background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
-        padding: 1.6rem 1rem;
+        padding: 1.4rem 0.9rem;
         border-radius: 14px;
         text-align: center;
-        margin-bottom: 1.6rem;
+        margin-bottom: 1.4rem;
         color: #f9fafb;
         font-weight: 700;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .brand-highlight {
@@ -342,12 +348,12 @@ custom_css = """
     .section-title {
         color: #e5e7eb;
         font-weight: 700;
-        font-size: 1.4rem;
-        margin-bottom: 1.2rem;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         border-bottom: 2px solid rgba(55, 65, 81, 0.9);
-        padding-bottom: 0.4rem;
+        padding-bottom: 0.35rem;
     }
     
     .status-running {
