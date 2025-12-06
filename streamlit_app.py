@@ -24,261 +24,12 @@ st.set_page_config(
 )
 
 custom_css = """
-        <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
-    
-    * {
-        font-family: 'Poppins', sans-serif;
-    }
-    .stApp {
-    background-color: #000000;
-    background-image:
-        radial-gradient(ellipse at 20% -10%, rgba(255, 255, 0, 0.85) 0, rgba(255, 255, 0, 0) 55%),
-        radial-gradient(ellipse at 80% -10%, rgba(255, 255, 255, 0.9) 0, rgba(255, 255, 255, 0) 55%),
-        radial-gradient(ellipse at 20% -10%, rgba(0, 0, 255, 0.85) 0, rgba(0, 0, 255, 0) 55%),
-        radial-gradient(ellipse at 80% -10%, rgba(255, 0, 255, 0.85) 0, rgba(255, 0, 255, 0) 55%),
-        radial-gradient(ellipse at 10% -10%, rgba(255, 0, 0, 0.85) 0, rgba(255, 0, 0, 0) 55%),
-        radial-gradient(ellipse at 90% -10%, rgba(0, 255, 255, 0.85) 0, rgba(0, 255, 255, 0) 55%);
-    background-repeat: no-repeat;
-    background-size: 60% 90%, 60% 90%, 60% 90%, 60% 90%, 60% 90%, 60% 90%;
-    background-position:
-        18% -40%,
-        82% -40%,
-        18% -40%,
-        82% -40%,
-        18% -40%,
-        82% -40%;
-    animation: discoColors 6s linear infinite;
-}  
-
-    @keyframes discoColors {
-    0%   { filter: hue-rotate(0deg); }
-    20%  { filter: hue-rotate(60deg); }
-    40%  { filter: hue-rotate(0deg); }
-    60%  { filter: hue-rotate(200deg); }
-    80%  { filter: hue-rotate(300deg); }
-    100% { filter: hue-rotate(0deg); }
-}
-    
-    .main .block-container {
-        background: rgba(255, 255, 255, 0.95) !important;
-        border-radius: 20px;
-        padding: 30px;
-        border: 2px solid transparent;
-        background-clip: padding-box;
-        position: relative;
-        animation: containerPulse 3s ease-in-out infinite;
-    }
-    
-    .main .block-container::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff0080, #00ff80, #ff00ff);
-        border-radius: 22px;
-        z-index: -1;
-        animation: borderRotate 3s linear infinite;
-        filter: blur(0.5px);
-    }
-    
-    @keyframes borderRotate {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    
-    @keyframes containerPulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.02); }
-    }
-    
-    .main-header {
-        background: rgba(255, 255, 255, 0.98) !important;
-        padding: 3rem 2rem;
-        border-radius: 25px;
-        text-align: center;
-        margin-bottom: 3rem;
-        border: 2px solid transparent;
-        background-clip: padding-box;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .main-header::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        background: linear-gradient(45deg, #ffff00, #ff00ff, #00ffff, #ffff00);
-        border-radius: 27px;
-        z-index: -1;
-        animation: headerBorder 2.5s linear infinite;
-    }
-    
-    @keyframes headerBorder {
-        0% { transform: rotate(0deg) scale(1); }
-        50% { transform: rotate(180deg) scale(1.02); }
-        100% { transform: rotate(360deg) scale(1); }
-    }
-    
-    .main-header h1 {
-        background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ff00);
-        background-size: 300% 300%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: 3.5rem;
-        font-weight: 800;
-        margin: 0;
-        letter-spacing: 2px;
-        animation: textRainbow 2s linear infinite;
-    }
-    
-    @keyframes textRainbow {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 300% 50%; }
-    }
-    
-    .main-header p {
-        color: #00ffff;
-        font-size: 1.4rem;
-        font-weight: 600;
-        margin-top: 1rem;
-        animation: pulseGlow 2s ease-in-out infinite alternate;
-    }
-    
-    @keyframes pulseGlow {
-        from { filter: brightness(1); }
-        to { filter: brightness(1.2); }
-    }
-    
-    .stButton>button {
-        background: linear-gradient(135deg, #ff00ff 0%, #00ffff 50%, #ffff00 100%);
-        background-size: 200% 200%;
-        color: #000 !important;
-        border: none;
-        border-radius: 15px;
-        padding: 1rem 2.5rem;
-        font-weight: 700;
-        font-size: 1.1rem;
-        position: relative;
-        overflow: hidden;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        animation: buttonShift 3s ease infinite;
-        transition: all 0.3s ease;
-    }
-    
-    @keyframes buttonShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    
-    .stButton>button:hover {
-        animation: none;
-        background: linear-gradient(135deg, #ffff00 0%, #ff00ff 100%);
-        transform: translateY(-3px) scale(1.05);
-    }
-    
-    .stTextInput>div>div>input, 
-    .stTextArea>div>div>textarea, 
-    .stNumberInput>div>div>input {
-        background: rgba(255, 255, 255, 0.9) !important;
-        border: 2px solid transparent;
-        border-radius: 12px;
-        color: #333 !important;
-        padding: 1rem;
-        font-weight: 500;
-        position: relative;
-        animation: inputBorder 4s linear infinite;
-        transition: all 0.3s ease;
-    }
-    
-    .stTextInput>div>div>input:focus, 
-    .stTextArea>div>div>textarea:focus {
-        border-image: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00) 1;
-        background: rgba(255, 255, 255, 1) !important;
-        transform: scale(1.02);
-    }
-    
-    @keyframes inputBorder {
-        0% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
-        25% { border-image: linear-gradient(45deg, #00ffff, #ffff00) 1; }
-        50% { border-image: linear-gradient(45deg, #ffff00, #00ff00) 1; }
-        75% { border-image: linear-gradient(45deg, #00ff00, #ff00ff) 1; }
-        100% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
-    }
-    
-    label {
-        color: #ff00ff !important;
-        font-weight: 700 !important;
-        font-size: 1rem !important;
-        margin-bottom: 8px !important;
-        animation: labelGlow 2s ease-in-out infinite alternate;
-    }
-    
-    @keyframes labelGlow {
-        from { filter: brightness(1); }
-        to { filter: brightness(1.3); }
-    }
-    
-    /* Dark Mode Toggle */
-    .theme-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1000;
-        background: linear-gradient(135deg, #ff00ff, #00ffff);
-        border: none;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        cursor: pointer;
-        font-size: 1.5rem;
-        color: #000;
-        font-weight: 800;
-        animation: togglePulse 2s infinite;
-        transition: all 0.3s ease;
-    }
-    
-    .theme-toggle:hover {
-        transform: scale(1.1) rotate(180deg);
-        background: linear-gradient(135deg, #ffff00, #ff00ff);
-    }
-    
-    @keyframes togglePulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
-    
-    /* Other Elements */
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%) !important;
-        border-right: 3px solid #00ffff;
-    }
-    
-    .stTabs [data-baseweb="tab-list"] {
-        background: rgba(255, 255, 255, 0.9);
-        gap: 10px;
-        padding: 15px;
-        border-radius: 15px;
-        border: 2px solid transparent;
-        animation: tabContainer 4s linear infinite;
-    }
-    
-    @keyframes tabContainer {
-        0% { border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1; }
-        25% { border-image: linear-gradient(45deg, #00ffff, #ffff00) 1; }
-        50% { border-image: linear-gradient(45deg, #ffff00, #00ff00) 1; }
-        75% { border-image: linear-gradient(45deg, #00ff00, #ff00ff) 1; }
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-custom_css = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
 
 * {
     font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
 }
 
 /* Page background - premium dark gradient */
@@ -289,22 +40,19 @@ custom_css = """
 
 /* Main container - glass card */
 .main .block-container {
-    background: rgba(15, 23, 42, 0.88) !important;
+    background: rgba(15, 23, 42, 0.9) !important;
     border-radius: 24px;
     padding: 28px 22px;
-    border: 1px solid rgba(148, 163, 184, 0.4);
+    border: 1px solid rgba(148, 163, 184, 0.35);
     box-shadow:
-        0 18px 45px rgba(15, 23, 42, 0.7),
+        0 18px 45px rgba(15, 23, 42, 0.8),
         0 0 0 1px rgba(15, 23, 42, 0.9);
     backdrop-filter: blur(18px);
 }
-.main .block-container::before {
-    content: none;
-}
 
-/* Header card */
+/* Header card (top logo/title area) */
 .main-header {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9)) !important;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.9)) !important;
     padding: 2.2rem 1.8rem;
     border-radius: 22px;
     margin-bottom: 2.3rem;
@@ -342,7 +90,7 @@ custom_css = """
     margin-top: 0.7rem;
 }
 
-/* Buttons - clean accent */
+/* Buttons - clean accent (login / signup / controls) */
 .stButton>button {
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: #0f172a !important;
@@ -354,6 +102,7 @@ custom_css = """
     letter-spacing: 0.03em;
     box-shadow: 0 10px 25px rgba(34, 197, 94, 0.35);
     transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+    cursor: pointer;
 }
 
 .stButton>button:hover {
@@ -362,7 +111,7 @@ custom_css = """
     filter: brightness(1.03);
 }
 
-/* Inputs */
+/* Text inputs / textarea / number inputs */
 .stTextInput>div>div>input,
 .stTextArea>div>div>textarea,
 .stNumberInput>div>div>input {
@@ -421,7 +170,7 @@ label {
     box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.7);
 }
 
-/* Console section */
+/* Console section (live logs) */
 .console-section {
     background: rgba(15, 23, 42, 0.95);
     border-radius: 15px;
