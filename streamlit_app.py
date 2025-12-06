@@ -22,306 +22,343 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-  
 custom_css = """
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
-  
-  * {
-      font-family: 'Poppins', sans-serif;
-  }
-  
-  /* Safe animated background - lighter version */
-  .stApp {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      background-size: 400% 400%;
-      animation: gradientShift 12s ease infinite;
-      position: relative;
-      min-height: 100vh;
-  }
-
-  .stApp::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%);
-      animation: floatParticles 20s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
-  }
-
-  @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-  }
-
-  @keyframes floatParticles {
-      0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
-      50% { transform: translateY(-20px) scale(1.05); opacity: 0.9; }
-  }
-
-  /* Main container - SAFE visibility */
-  .main .block-container {
-      background: rgba(255, 255, 255, 0.95) !important;
-      backdrop-filter: blur(15px);
-      padding: 2rem 1.5rem 3rem !important;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.2);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-      animation: containerPulse 4s ease-in-out infinite alternate;
-      position: relative;
-      z-index: 1;
-      max-width: 100%;
-  }
-
-  @keyframes containerPulse {
-      0% { box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-      100% { box-shadow: 0 25px 70px rgba(0,0,0,0.15); }
-  }
-  
-  /* HEADER - Fixed & visible */
-  .main-header {
-      background: rgba(255, 255, 255, 0.98) !important;
-      backdrop-filter: blur(20px);
-      padding: 2.5rem 2rem !important;
-      border-radius: 28px;
-      margin-bottom: 2rem !important;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-      border: 1px solid rgba(255,255,255,0.3);
-      text-align: center;
-      animation: headerFloat 6s ease-in-out infinite;
-      position: relative;
-      z-index: 2;
-  }
-
-  @keyframes headerFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-  }
-
-  .main-header h1 {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 2.2rem;
-      font-weight: 800;
-      margin: 0 0 1rem 0;
-      letter-spacing: -0.02em;
-      animation: textGlow 3s ease-in-out infinite alternate;
-  }
-
-  @keyframes textGlow {
-      0% { text-shadow: 0 0 10px rgba(102, 126, 234, 0.3); }
-      100% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
-  }
-
-  .main-header p {
-      color: #64748b !important;
-      font-size: 1rem;
-      font-weight: 500;
-      margin: 0;
-      opacity: 0.9;
-  }
-
-  /* TABS - Fixed positioning */
-  .stTabs [data-baseweb="tab-list"] {
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.9) !important;
-      padding: 10px !important;
-      border-radius: 50px !important;
-      border: 1px solid rgba(0,0,0,0.1);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      margin: 0 auto 2rem !important;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      z-index: 3;
-  }
-
-  .stTabs [data-baseweb="tab"] {
-      background: transparent !important;
-      border-radius: 50px !important;
-      color: #64748b !important;
-      padding: 10px 24px !important;
-      font-weight: 600 !important;
-      border: 2px solid transparent !important;
-      font-size: 0.9rem !important;
-      transition: all 0.3s ease !important;
-      white-space: nowrap;
-  }
-
-  .stTabs [data-baseweb="tab"]:hover {
-      background: rgba(102, 126, 234, 0.1) !important;
-      border-color: rgba(102, 126, 234, 0.3) !important;
-      color: #1e293b !important;
-  }
-
-  .stTabs [aria-selected="true"] {
-      background: linear-gradient(135deg, #667eea, #764ba2) !important;
-      color: white !important;
-      border-color: rgba(102, 126, 234, 0.5) !important;
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
-  }
-
-  /* Section titles - Always visible */
-  .section-title {
-      color: #1e293b !important;
-      font-weight: 800 !important;
-      font-size: 1.2rem !important;
-      margin: 1.5rem 0 1rem 0 !important;
-      padding-bottom: 0.5rem !important;
-      border-bottom: 3px solid transparent;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      position: relative;
-  }
-
-  .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 50px;
-      height: 3px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      border-radius: 2px;
-      animation: underlineGrow 2s ease-in-out infinite;
-  }
-
-  @keyframes underlineGrow {
-      0%, 100% { width: 50px; }
-      50% { width: 100px; }
-  }
-  
-  /* INPUTS - High contrast & visible */
-  .stTextInput > div > div > input,
-  .stTextArea > div > div > textarea,
-  .stNumberInput > div > div > input {
-      background: white !important;
-      border: 2px solid #e2e8f0 !important;
-      border-radius: 12px !important;
-      color: #1e293b !important;
-      padding: 12px 16px !important;
-      font-size: 0.95rem !important;
-      font-weight: 500 !important;
-      transition: all 0.3s ease !important;
-      min-height: 48px !important;
-  }
-
-  .stTextInput > div > div > input:focus,
-  .stTextArea > div > div > textarea:focus,
-  .stNumberInput > div > div > input:focus {
-      border-color: #667eea !important;
-      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1) !important;
-      background: #fefefe !important;
-      transform: translateY(-1px);
-  }
-
-  label {
-      color: #475569 !important;
-      font-weight: 700 !important;
-      font-size: 0.85rem !important;
-      margin-bottom: 8px !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.05em !important;
-      display: block !important;
-  }
-
-  /* BUTTONS - Bold & visible */
-  .stButton > button {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-      color: white !important;
-      border: none !important;
-      border-radius: 50px !important;
-      padding: 14px 28px !important;
-      font-weight: 700 !important;
-      font-size: 1rem !important;
-      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4) !important;
-      width: 100% !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.05em !important;
-      transition: all 0.3s ease !important;
-      position: relative;
-      overflow: visible !important;
-  }
-
-  .stButton > button:hover {
-      transform: translateY(-3px) !important;
-      box-shadow: 0 20px 45px rgba(102, 126, 234, 0.6) !important;
-  }
-
-  /* CONSOLE - Fixed dark theme */
-  .console-section {
-      background: #1e293b !important;
-      border-radius: 20px !important;
-      padding: 2rem !important;
-      border: 1px solid #334155 !important;
-      margin-top: 2rem !important;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.2) !important;
-  }
-
-  .console-header {
-      color: #60a5fa !important;
-      font-weight: 800 !important;
-      font-size: 1.1rem !important;
-      margin-bottom: 1.5rem !important;
-      text-transform: uppercase !important;
-  }
-
-  .console-output {
-      background: #0f172a !important;
-      border: 1px solid #1e40af !important;
-      border-radius: 12px !important;
-      padding: 1.5rem !important;
-      color: #10b981 !important;
-      font-family: 'Monaco', 'Menlo', monospace !important;
-      font-size: 14px !important;
-      max-height: 400px !important;
-      overflow-y: auto !important;
-      line-height: 1.6 !important;
-  }
-
-  /* SIDEBAR - Safe styling */
-  [data-testid="stSidebar"] {
-      background: rgba(255, 255, 255, 0.95) !important;
-      border-right: 1px solid #e2e8f0 !important;
-  }
-
-  .sidebar-header {
-      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-      padding: 1.5rem;
-      border-radius: 16px;
-      text-align: center;
-      margin: 1rem;
-      color: #1e293b;
-      font-weight: 800;
-      border: 1px solid rgba(102, 126, 234, 0.2);
-  }
-
-  /* Status indicators */
-  .status-running {
-      color: #10b981 !important;
-      font-weight: 800 !important;
-  }
-  
-  .status-stopped {
-      color: #ef4444 !important;
-      font-weight: 800 !important;
-  }
-
-  /* Ensure scrollbars are visible */
-  * {
-      scrollbar-width: thin;
-      scrollbar-color: #cbd5e1 transparent;
-  }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+    
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .stApp {
+        background: linear-gradient(135deg, #ffffff 0%, #ffe6f2 50%, #ffccff 100%);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    
+    .main .block-container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(255, 105, 180, 0.2);
+        border: 2px solid rgba(255, 182, 193, 0.3);
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .main-header {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 50%, #dc143c 100%);
+        padding: 3rem 2rem;
+        border-radius: 25px;
+        text-align: center;
+        margin-bottom: 3rem;
+        box-shadow: 0 15px 40px rgba(255, 20, 147, 0.3);
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .main-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+        animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+    
+    .main-header h1 {
+        color: white;
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin: 0;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        letter-spacing: 1px;
+    }
+    
+    .main-header p {
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .stButton>button {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        padding: 1rem 2.5rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .stButton>button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255, 20, 147, 0.6);
+        background: linear-gradient(135deg, #ff1493 0%, #dc143c 100%);
+    }
+    
+    .stTextInput>div>div>input, 
+    .stTextArea>div>div>textarea, 
+    .stNumberInput>div>div>input {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid #ffb6c1;
+        border-radius: 12px;
+        color: #333;
+        padding: 1rem;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .stTextInput>div>div>input:focus, 
+    .stTextArea>div>div>textarea:focus {
+        background: rgba(255, 255, 255, 1);
+        border-color: #ff1493;
+        box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.1);
+        color: #333;
+    }
+    
+    label {
+        color: #ff1493 !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 10px;
+        background: rgba(255, 182, 193, 0.2);
+        padding: 15px;
+        border-radius: 15px;
+        border: 2px solid rgba(255, 105, 180, 0.2);
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 12px;
+        color: #ff1493;
+        padding: 12px 25px;
+        font-weight: 600;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        color: white;
+        border-color: #ff1493;
+        box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    }
+    
+    [data-testid="stMetricValue"] {
+        color: #ff1493;
+        font-weight: 800;
+        font-size: 2.2rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    [data-testid="stMetricLabel"] {
+        color: #ff6b9d;
+        font-weight: 700;
+        font-size: 1rem;
+    }
+    
+    .metric-container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px solid #ffb6c1;
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+    }
+    
+    .console-section {
+        margin-top: 25px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        border: 2px solid #ff1493;
+        box-shadow: 0 4px 20px rgba(255, 20, 147, 0.1);
+    }
+    
+    .console-header {
+        color: #ff1493;
+        font-weight: 800;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .console-output {
+        background: #1a1a1a;
+        border: 2px solid #ff1493;
+        border-radius: 12px;
+        padding: 15px;
+        font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+        font-size: 13px;
+        color: #00ff88;
+        line-height: 1.7;
+        max-height: 500px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ff1493 #333;
+    }
+    
+    .console-output::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    .console-output::-webkit-scrollbar-track {
+        background: #333;
+        border-radius: 5px;
+    }
+    
+    .console-output::-webkit-scrollbar-thumb {
+        background: #ff1493;
+        border-radius: 5px;
+    }
+    
+    .console-output::-webkit-scrollbar-thumb:hover {
+        background: #ff6b9d;
+    }
+    
+    .console-line {
+        margin-bottom: 5px;
+        word-wrap: break-word;
+        padding: 8px 12px;
+        padding-left: 35px;
+        color: #00ff88;
+        background: rgba(255, 20, 147, 0.05);
+        border-left: 3px solid #ff1493;
+        position: relative;
+        border-radius: 5px;
+    }
+    
+    .console-line::before {
+        content: '▶';
+        position: absolute;
+        left: 12px;
+        color: #ff1493;
+        font-weight: bold;
+    }
+    
+    .success-box {
+        background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        margin: 1rem 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .error-box {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        margin: 1rem 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .info-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 20px;
+        margin: 1.5rem 0;
+        border: 2px solid #ffb6c1;
+        box-shadow: 0 8px 25px rgba(255, 105, 180, 0.15);
+    }
+    
+    .footer {
+        text-align: center;
+        padding: 2.5rem;
+        color: #ff1493;
+        font-weight: 800;
+        font-size: 1.1rem;
+        margin-top: 4rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        border-top: 3px solid #ff1493;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #ffffff 0%, #ffe6f2 100%);
+        border-right: 3px solid #ff1493;
+    }
+    
+    [data-testid="stSidebar"] .element-container {
+        color: #ff1493;
+    }
+    
+    .sidebar-header {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        padding: 2rem 1rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: white;
+        font-weight: 800;
+        font-size: 1.3rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .brand-highlight {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+    }
+    
+    .section-title {
+        color: #ff1493;
+        font-weight: 800;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 3px solid #ffb6c1;
+        padding-bottom: 0.5rem;
+    }
+    
+    .status-running {
+        color: #00ff00;
+        font-weight: 800;
+        text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+    
+    .status-stopped {
+        color: #ff4444;
+        font-weight: 800;
+    }
 </style>
 """
 st.markdown(custom_css, unsafe_allow_html=True)
