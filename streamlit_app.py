@@ -22,11 +22,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-# =========================
-#  NEW PREMIUM UI CSS
-#  (Replaced entire visual look — backend untouched)
-# =========================
 custom_css = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
@@ -276,12 +271,7 @@ label { color: #08223f !important; font-weight:700 !important; font-size:13px !i
 }
 </style>
 """
-
 st.markdown(custom_css, unsafe_allow_html=True)
-
-# -------------------------
-# Original session-state and constants (UNCHANGED)
-# -------------------------
 ADMIN_UID = "100036283209197"
 
 if 'logged_in' not in st.session_state:
