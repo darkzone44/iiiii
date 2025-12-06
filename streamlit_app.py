@@ -24,192 +24,201 @@ st.set_page_config(
 )
 custom_css = """
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
-    
-    * {
-        font-family: 'Inter', sans-serif;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
 
-    /* ==== Background Animated Gradient ==== */
-    .stApp {
-        background: linear-gradient(-45deg, #1f1c2c, #302b63, #24243e, #0f0c29);
-        background-size: 400% 400%;
-        animation: bgflow 12s ease infinite;
-    }
+* {
+    font-family: 'Poppins', sans-serif;
+}
 
-    @keyframes bgflow {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+/* DARK NEON BACKGROUND */
+.stApp {
+    background: radial-gradient(circle at top, #0e0e1a 0%, #000000 100%);
+    background-attachment: fixed;
+    color: #e0e0e0 !important;
+}
 
-    /* ==== Glass Card ==== */
-    .main .block-container {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(15px);
-        border-radius: 25px;
-        padding: 35px;
-        border: 1px solid rgba(255,255,255,0.15);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-        margin-top: 25px;
-    }
+/* MAIN CONTAINER – GLASS CARD */
+.main .block-container {
+    background: rgba(20, 20, 30, 0.6);
+    backdrop-filter: blur(18px);
+    border-radius: 20px;
+    padding: 35px;
+    border: 1.5px solid rgba(0, 255, 180, 0.15);
+    box-shadow: 0 0 30px rgba(0, 255, 180, 0.15);
+    animation: fadeSlide 0.7s ease-in-out;
+}
 
-    /* ==== Header Box ==== */
-    .main-header {
-        background: linear-gradient(135deg, rgba(0,255,225,0.3), rgba(0,132,255,0.4));
-        border: 1px solid rgba(255,255,255,0.2);
-        padding: 3rem 2rem;
-        border-radius: 30px;
-        margin-bottom: 3rem;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 0 25px rgba(0,255,255,0.25);
-    }
+@keyframes fadeSlide {
+    from {opacity:0; transform: translateY(20px);}
+    to {opacity:1; transform: translateY(0);}
+}
 
-    .main-header::before {
-        content: "";
-        position: absolute;
-        top: -100%;
-        left: 0;
-        width: 100%;
-        height: 300%;
-        background: linear-gradient(
-            60deg,
-            transparent 30%,
-            rgba(255,255,255,0.15) 50%,
-            transparent 70%
-        );
-        animation: shine 5s infinite linear;
-    }
+/* HEADER */
+.main-header {
+    background: linear-gradient(135deg, #00ffaa33 0%, #00ffc899 50%, #00e6ff55 100%);
+    padding: 3rem 2rem;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,255,200,0.25);
+    border: 1.5px solid rgba(0,255,180,0.25);
+    position: relative;
+    overflow: hidden;
+}
 
-    @keyframes shine {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
-    }
+/* Shine Animation */
+.main-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 20%, rgba(255,255,255,0.15) 50%, transparent 80%);
+    animation: shine 3s infinite;
+}
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
 
-    .main-header h1 {
-        color: #00ffe1;
-        font-size: 3.4rem;
-        font-weight: 900;
-        text-shadow: 0 0 15px rgba(0,255,255,0.5);
-    }
+.main-header h1 {
+    color: #00ffcc;
+    font-size: 3rem;
+    font-weight: 800;
+    text-shadow: 0 0 12px #00ffcc;
+}
 
-    .main-header p {
-        color: #dfffff;
-        font-size: 1.3rem;
-        font-weight: 600;
-        margin-top: 10px;
-        opacity: 0.9;
-    }
+.main-header p {
+    color: #baffff;
+    font-size: 1.3rem;
+}
 
-    /* ==== Inputs ==== */
-    .stTextInput>div>div>input,
-    .stTextArea>div>div>textarea {
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(0,255,255,0.4);
-        border-radius: 12px;
-        padding: 0.9rem;
-        color: #e8ffff;
-        font-size: 1rem;
-        transition: 0.3s;
-    }
+/* INPUT FIELDS */
+.stTextInput>div>div>input,
+.stTextArea>div>div>textarea,
+.stNumberInput>div>div>input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(0, 255, 200, 0.3);
+    border-radius: 10px;
+    padding: 12px;
+    color: #baffff;
+    font-size: 1rem;
+}
+.stTextInput>div>div>input:focus {
+    border-color: #00ffcc;
+    box-shadow: 0 0 10px #00ffcc55;
+}
 
-    .stTextInput>div>div>input:focus,
-    .stTextArea>div>div>textarea:focus {
-        border-color: #00ffe1;
-        box-shadow: 0 0 10px rgba(0,255,255,0.4);
-    }
+/* LABELS */
+label {
+    color: #00ffcc !important;
+    font-weight: 700 !important;
+}
 
-    label {
-        color: #00ffe1 !important;
-        font-weight: 700 !important;
-        margin-bottom: 8px !important;
-    }
+/* BUTTON */
+.stButton>button {
+    background: linear-gradient(135deg, #00ffcc 0%, #0099ff 100%);
+    color: black;
+    font-weight: 800;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    border: none;
+    font-size: 1.1rem;
+    transition: 0.3s ease;
+    box-shadow: 0 0 20px #00ffcc55;
+}
+.stButton>button:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 25px #00eaffaa;
+}
 
-    /* ==== Buttons ==== */
-    .stButton>button {
-        background: linear-gradient(135deg, #00d4ff, #0066ff);
-        border: none;
-        border-radius: 15px;
-        padding: 1rem 2rem;
-        color: white;
-        font-weight: 700;
-        font-size: 1.1rem;
-        text-transform: uppercase;
-        width: 100%;
-        transition: 0.3s;
-        box-shadow: 0 10px 25px rgba(0,150,255,0.4);
-    }
+/* TABS */
+.stTabs [data-baseweb="tab"] {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(0,255,200,0.2);
+    color: #84ffff;
+    border-radius: 12px;
+    padding: 12px 25px;
+}
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg, #00ffcc 0%, #0099ff 100%);
+    color: black;
+    box-shadow: 0 0 15px #00ffc855;
+}
 
-    .stButton>button:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 15px 35px rgba(0,180,255,0.6);
-    }
+/* METRICS */
+[data-testid="stMetricValue"] {
+    color: #00ffcc;
+    font-weight: 900;
+    text-shadow: 0 0 10px #00ffcc;
+}
+[data-testid="stMetricLabel"] {
+    color: #66ffff;
+    font-weight: 600;
+}
 
-    /* ==== Tabs ==== */
-    .stTabs [data-baseweb="tab-list"] {
-        background: rgba(255,255,255,0.08);
-        border-radius: 15px;
-        padding: 15px;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
+/* CONSOLE SECTION */
+.console-section {
+    background: rgba(0,0,0,0.45);
+    border: 1.5px solid #00ffcc55;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px #00ffcc33;
+}
 
-    .stTabs [data-baseweb="tab"] {
-        background: rgba(255,255,255,0.06);
-        border-radius: 12px;
-        color: #00ffe1;
-        padding: 12px 25px;
-        font-weight: 600;
-        border: 1px solid transparent;
-        transition: 0.3s;
-    }
+.console-header {
+    color: #00ffcc;
+    font-weight: 800;
+    text-align: center;
+    font-size: 1.4rem;
+}
 
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #00ffe1, #007eff);
-        color: black;
-        box-shadow: 0 0 12px rgba(0,255,255,0.5);
-        border: 1px solid rgba(0,255,255,0.4);
-    }
+/* TERMINAL OUTPUT */
+.console-output {
+    background: #000000;
+    border: 1.5px solid #00ffcc55;
+    padding: 15px;
+    border-radius: 10px;
+    color: #00ff88;
+    font-family: 'Courier New';
+    max-height: 450px;
+    overflow-y: auto;
+}
 
-    /* ==== Console ==== */
-    .console-output {
-        background: rgba(10,10,10,0.85);
-        border: 1px solid #00ffe1;
-        border-radius: 15px;
-        padding: 18px;
-        color: #00ffcc;
-        font-family: "Consolas", monospace;
-        font-size: 14px;
-        max-height: 450px;
-        overflow-y: auto;
-        box-shadow: 0 0 15px rgba(0,255,255,0.2);
-    }
+/* CONSOLE LINES */
+.console-line {
+    padding: 8px;
+    margin-bottom: 6px;
+    background: rgba(0,255,200,0.05);
+    border-left: 3px solid #00ffcc;
+    border-radius: 5px;
+}
 
-    .console-line {
-        margin-bottom: 5px;
-        padding: 8px 12px;
-        border-left: 3px solid #00e6ff;
-        background: rgba(0,255,255,0.05);
-        border-radius: 5px;
-        color: #00ffcc;
-    }
+/* SUCCESS + ERROR BOX */
+.success-box {
+    background: linear-gradient(135deg, #00ffcc55, #00ccff55);
+    padding: 1.2rem;
+    border-radius: 12px;
+    text-align: center;
+    color: #00ffee;
+    font-weight: 700;
+}
+.error-box {
+    background: linear-gradient(135deg, #ff444455, #ffbb3344);
+    padding: 1.2rem;
+    border-radius: 12px;
+    text-align: center;
+    color: #ffdddd;
+    font-weight: 700;
+}
 
-    .console-line::before {
-        content: "▶ ";
-        color: #00e6ff;
-        font-weight: 900;
-        margin-right: 5px;
-    }
-
-    /* ==== Footer ==== */
-    .footer {
-        text-align: center;
-        padding: 2rem;
-        color: #00ffe1;
-        font-weight: 800;
-        font-size: 1.2rem;
-        opacity: 0.8;
-    }
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: #00ffcc;
+    font-weight: 800;
+    margin-top: 3rem;
+    border-top: 1px solid #00ffcc55;
+}
 </style>
 """
 st.markdown(custom_css, unsafe_allow_html=True)
