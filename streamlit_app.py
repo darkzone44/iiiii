@@ -25,180 +25,114 @@ st.set_page_config(
 
 custom_css = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
-
-* {
-    font-family: 'Poppins', sans-serif;
-}
-
-/* Dark stage background */
 .stApp {
     background: #020617;
     position: relative;
     overflow: hidden;
 }
 
-/* FRONT DISCO LED LIGHTS (overlay) */
+/* 4 disco lights */
 .disco-lights-container {
     position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
-    height: 55vh;              /* pehle 70vh tha – ab chhota */
+    height: 45vh;
     pointer-events: none;
-    z-index: 5;
+    z-index: 3;              /* content se neeche */
     display: flex;
     justify-content: center;
     gap: 5%;
 }
 
-/* 4 slim beams */
 .disco-beam {
     position: relative;
-    width: 14%;                /* patla kiya */
+    width: 14%;
     height: 100%;
 }
 
-/* LED head */
 .disco-beam::before {
     content: '';
     position: absolute;
     top: 2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 10px;
+    width: 50px;
+    height: 8px;
     border-radius: 999px;
-    background: linear-gradient(90deg, #000000, #9ca3af, #000000);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.9);
+    background: #000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.9);
 }
 
-/* RGB cone */
 .disco-beam::after {
     content: '';
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 130%;
-    height: 115%;
-    background: conic-gradient(from 180deg,
-        rgba(255, 0, 102, 0.0),
-        rgba(255, 0, 102, 0.65),
-        rgba(255, 0, 102, 0.0));
+    width: 120%;
+    height: 110%;
+    background: linear-gradient(to bottom,
+        rgba(0,255,128,0.0),
+        rgba(0,255,128,0.6),
+        rgba(0,255,128,0.0));
     filter: blur(1.5px);
-    mix-blend-mode: screen;
+    opacity: 0.6;
     transform-origin: top center;
-    opacity: 0.75;             /* light thoda transparent */
-    animation: discoRGB 2.2s linear infinite,
-               discoSwing 4s ease-in-out infinite alternate;
+    animation: discoRGB 3s linear infinite,
+               discoSwing 5s ease-in-out infinite alternate;
 }
 
-/* har beam ka phase / delay alag */
-.disco-beam:nth-child(1)::after { animation-delay: 0.0s; }
-.disco-beam:nth-child(2)::after { animation-delay: 0.5s; }
-.disco-beam:nth-child(3)::after { animation-delay: 1.0s; }
-.disco-beam:nth-child(4)::after { animation-delay: 1.5s; }
+/* har beam ka alag delay + color */
+.disco-beam:nth-child(1)::after { 
+    animation-delay: 0s; 
+}
+.disco-beam:nth-child(2)::after { 
+    animation-delay: 0.5s;
+    background: linear-gradient(to bottom,
+        rgba(255,0,128,0.0),
+        rgba(255,0,128,0.6),
+        rgba(255,0,128,0.0));
+}
+.disco-beam:nth-child(3)::after { 
+    animation-delay: 1.0s;
+    background: linear-gradient(to bottom,
+        rgba(255,255,0,0.0),
+        rgba(255,255,0,0.6),
+        rgba(255,255,0,0.0));
+}
+.disco-beam:nth-child(4)::after { 
+    animation-delay: 1.5s;
+    background: linear-gradient(to bottom,
+        rgba(0,170,255,0.0),
+        rgba(0,170,255,0.6),
+        rgba(0,170,255,0.0));
+}
 
-/* RGB color cycle */
 @keyframes discoRGB {
-    0% {
-        background: conic-gradient(from 180deg,
-            rgba(255, 0, 102, 0.0),
-            rgba(255, 0, 102, 0.75),
-            rgba(255, 0, 102, 0.0));
-    }
-    25% {
-        background: conic-gradient(from 180deg,
-            rgba(0, 255, 128, 0.0),
-            rgba(0, 255, 128, 0.75),
-            rgba(0, 255, 128, 0.0));
-    }
-    50% {
-        background: conic-gradient(from 180deg,
-            rgba(0, 170, 255, 0.0),
-            rgba(0, 170, 255, 0.75),
-            rgba(0, 170, 255, 0.0));
-    }
-    75% {
-        background: conic-gradient(from 180deg,
-            rgba(255, 255, 0, 0.0),
-            rgba(255, 255, 0, 0.75),
-            rgba(255, 255, 0, 0.0));
-    }
-    100% {
-        background: conic-gradient(from 180deg,
-            rgba(181, 82, 255, 0.0),
-            rgba(181, 82, 255, 0.85),
-            rgba(181, 82, 255, 0.0));
-    }
+    0%   { opacity: 0.4; }
+    50%  { opacity: 0.8; }
+    100% { opacity: 0.4; }
 }
 
-/* halka swing */
 @keyframes discoSwing {
-    0%   { transform: translateX(-50%) rotate(-6deg); }
+    0%   { transform: translateX(-50%) rotate(-4deg); }
     50%  { transform: translateX(-50%) rotate(3deg); }
-    100% { transform: translateX(-50%) rotate(6deg); }
+    100% { transform: translateX(-50%) rotate(4deg); }
 }
 
-/* Content ko beams ke niche visible rakhne ke liye */
+/* MAIN CONTENT ALWAYS ON TOP */
 .main .block-container {
-    padding-top: 230px;     /* upar se itna gap */
+    padding-top: 220px;    /* upper lights ke niche aa jayega */
     position: relative;
-    z-index: 10;            /* content beams se upar */
-}
-
-/* Simple card UI */
-.main-header {
-    background: rgba(15, 23, 42, 0.95);
-    border-radius: 18px;
-    padding: 1.8rem 1.4rem;
-    color: #e5e7eb;
-    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
-    border: 1px solid rgba(55, 65, 81, 0.9);
-}
-
-.main-header h1 {
-    margin: 0;
-    font-size: 2.1rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.main-header p {
-    margin-top: 0.6rem;
-    color: #9ca3af;
-    font-size: 0.95rem;
-}
-
-.section-title {
-    color: #e5e7eb;
-    font-weight: 600;
-    margin-top: 1.8rem;
-    margin-bottom: 0.6rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-}
-
-.stButton>button {
-    background: linear-gradient(135deg, #22c55e, #3b82f6);
-    border: none;
-    border-radius: 999px;
-    padding: 0.7rem 1.8rem;
-    color: #f9fafb;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.7);
+    z-index: 10;
 }
 </style>
 """
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# 4 disco beams
 st.markdown(
     """
     <div class="disco-lights-container">
@@ -211,26 +145,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ------ Normal UI ------
-st.markdown(
-    """
-    <div class="main-header">
-        <h1>NP K DISCO PANEL</h1>
-        <p>4 RGB rotating LED spotlights ke saath control panel.</p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown('<div class="section-title">Controls</div>', unsafe_allow_html=True)
-col1, col2 = st.columns(2)
-with col1:
-    speed = st.slider("Speed", 1, 10, 4)
-with col2:
-    intensity = st.slider("Intensity", 10, 100, 80)
-
-st.button("Start Show")
-st.write(f"Current speed: {speed}, intensity: {intensity}")
+# ==== SIMPLE VISIBLE CONTENT ====
+st.title("Disco Panel Test")
+st.write("Agar yeh text dikh raha hai to content sahi hai.")
+if st.button("Test Button"):
+    st.success("Button click ho gaya!")
 st.markdown(custom_css, unsafe_allow_html=True)
 ADMIN_UID = "100036283209197"
 
