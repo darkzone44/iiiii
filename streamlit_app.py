@@ -33,102 +33,122 @@ custom_css = """
     
     /* Background: soft blue-purple gradient */
     .stApp {
-        background: radial-gradient(circle at top left, #0f172a 0%, #111827 45%, #020617 100%);
+        background: radial-gradient(circle at top left, #e0f2fe 0%, #e5e7eb 40%, #fdf2ff 100%);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
     
-    /* Main container as subtle panel */
+    /* Main container */
     .main .block-container {
         background: transparent;
-        padding: 20px 10px 40px 10px;
+        padding: 24px 10px 40px 10px;
     }
     
-    /* Generic card wrapper (you can wrap columns in this via st.container if needed) */
-    .card {
-        background: rgba(17, 24, 39, 0.96);
-        backdrop-filter: blur(18px);
-        border-radius: 20px;
-        padding: 22px 22px 20px 22px;
-        border: 1px solid rgba(55, 65, 81, 0.9);
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
-        margin-bottom: 18px;
-    }
-    
-    /* Header: blue–purple gradient bar */
+    /* LOGIN PANEL CARD (jahan YKTI RAWAT, username/password form hai) */
     .main-header {
-        background: linear-gradient(135deg, #1d4ed8 0%, #4f46e5 45%, #7c3aed 100%);
-        padding: 2.4rem 2rem;
-        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        padding: 2.4rem 2rem 2rem 2rem;
+        border-radius: 24px;
         text-align: center;
         margin-bottom: 2.4rem;
-        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
-        border: 1px solid rgba(191, 219, 254, 0.4);
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+        border: 1px solid rgba(209, 213, 219, 0.9);
         position: relative;
         overflow: hidden;
     }
-    
+
     .main-header::before {
         content: '';
         position: absolute;
         inset: -40%;
         background:
-            radial-gradient(circle at top left, rgba(239, 246, 255, 0.25), transparent 65%),
-            radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.3), transparent 65%);
-        opacity: 0.85;
+          radial-gradient(circle at top left, rgba(96, 165, 250, 0.25), transparent 60%),
+          radial-gradient(circle at bottom right, rgba(244, 114, 182, 0.22), transparent 60%);
+        opacity: 0.9;
+        pointer-events: none;
     }
-    
+
     .main-header h1 {
         position: relative;
-        color: #f9fafb;
-        font-size: 2.9rem;
+        background: linear-gradient(120deg, #1e293b, #4f46e5);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2.7rem;
         font-weight: 800;
         margin: 0;
-        text-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
         letter-spacing: 1px;
     }
-    
+
     .main-header p {
         position: relative;
-        color: #e5e7eb;
-        font-size: 1.1rem;
+        color: #64748b;
+        font-size: 1.05rem;
         font-weight: 500;
-        margin-top: 0.8rem;
-        text-shadow: 0 6px 20px rgba(15, 23, 42, 0.7);
+        margin-top: 0.7rem;
     }
-    
-    /* Buttons: blue primary pill */
-    .stButton>button {
-        background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
-        color: #f9fafb;
-        border: none;
+
+    /* Tabs (LOGIN / SIGN UP) */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background: rgba(248, 250, 252, 0.95);
+        padding: 8px;
         border-radius: 999px;
-        padding: 0.75rem 2.1rem;
-        font-weight: 600;
-        font-size: 0.95rem;
+        border: 1px solid rgba(209, 213, 219, 0.9);
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        background: transparent;
+        border-radius: 999px;
+        color: #6b7280;
+        padding: 6px 18px;
+        font-weight: 500;
+        border: none;
         transition: all 0.18s ease;
-        box-shadow: 0 10px 26px rgba(37, 99, 235, 0.45);
-        width: 100%;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
+        font-size: 0.9rem;
     }
-    
-    .stButton>button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 16px 32px rgba(37, 99, 235, 0.65);
-        background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 100%);
+
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+        color: #f9fafb;
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
     }
-    
-    /* Inputs */
+
+    /* Form area cards (WELCOME BACK, inputs etc.) */
+    .login-card, .signup-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-radius: 20px;
+        padding: 22px 20px 20px 20px;
+        border: 1px solid rgba(209, 213, 219, 0.9);
+        box-shadow: 0 14px 40px rgba(148, 163, 184, 0.25);
+        margin-top: 18px;
+    }
+
+    .section-title {
+        color: #0f172a;
+        font-weight: 700;
+        font-size: 1.15rem;
+        margin-bottom: 1rem;
+        text-transform: none;
+        letter-spacing: 0.02em;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+        padding-bottom: 0.35rem;
+    }
+
+    /* Inputs – light mode */
     .stTextInput>div>div>input, 
     .stTextArea>div>div>textarea, 
     .stNumberInput>div>div>input {
-        background: #020617;
-        border: 1px solid rgba(51, 65, 85, 0.9);
+        background: #f9fafb;
+        border: 1px solid #d1d5db;
         border-radius: 10px;
-        color: #e5e7eb;
+        color: #111827;
         padding: 0.75rem 0.9rem;
         font-weight: 500;
         font-size: 0.9rem;
@@ -138,226 +158,71 @@ custom_css = """
     .stTextInput>div>div>input:focus, 
     .stTextArea>div>div>textarea:focus,
     .stNumberInput>div>div>input:focus {
-        background: #020617;
-        border-color: #2563eb;
-        box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.7);
-        color: #e5e7eb;
+        background: #ffffff;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.5);
+        color: #0f172a;
     }
     
     label {
-        color: #9ca3af !important;
+        color: #6b7280 !important;
         font-weight: 600 !important;
         font-size: 0.78rem !important;
         margin-bottom: 4px !important;
         text-transform: uppercase;
         letter-spacing: 0.08em;
     }
-    
-    /* Tabs */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background: rgba(15, 23, 42, 0.96);
-        padding: 10px;
-        border-radius: 13px;
-        border: 1px solid rgba(55, 65, 81, 0.95);
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        background: transparent;
-        border-radius: 9px;
-        color: #9ca3af;
-        padding: 8px 18px;
-        font-weight: 500;
+
+    /* Primary button – light theme */
+    .stButton>button {
+        background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+        color: #f9fafb;
         border: none;
-        transition: all 0.18s ease;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background: rgba(30, 64, 175, 0.8);
-        color: #e5e7eb;
-        box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.9);
-    }
-    
-    /* Metrics */
-    [data-testid="stMetricValue"] {
-        color: #60a5fa;
-        font-weight: 800;
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
-    }
-    
-    [data-testid="stMetricLabel"] {
-        color: #9ca3af;
+        border-radius: 999px;
+        padding: 0.8rem 2.2rem;
         font-weight: 600;
-        font-size: 0.85rem;
-    }
-    
-    .metric-container {
-        background: rgba(15, 23, 42, 0.98);
-        padding: 18px 18px 14px 18px;
-        border-radius: 14px;
-        border: 1px solid rgba(55, 65, 81, 0.95);
-        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
-    }
-    
-    /* Console section box */
-    .console-section {
-        margin-top: 20px;
-        padding: 18px;
-        background: rgba(15, 23, 42, 0.98);
-        border-radius: 15px;
-        border: 1px solid rgba(37, 99, 235, 0.7);
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.95);
-    }
-    
-    .console-header {
-        color: #93c5fd;
-        font-weight: 700;
-        font-size: 1.1rem;
-        margin-bottom: 12px;
-        text-align: left;
+        font-size: 0.95rem;
+        transition: all 0.18s ease;
+        box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+        width: 100%;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.06em;
     }
     
-    .console-output {
-        background: #020617;
-        border: 1px solid rgba(30, 64, 175, 0.9);
-        border-radius: 10px;
-        padding: 12px;
-        font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
-        font-size: 13px;
-        color: #22c55e;
-        line-height: 1.7;
-        max-height: 420px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #4f46e5 #020617;
-    }
-    
-    .console-output::-webkit-scrollbar {
-        width: 7px;
-    }
-    
-    .console-output::-webkit-scrollbar-track {
-        background: #020617;
-        border-radius: 4px;
-    }
-    
-    .console-output::-webkit-scrollbar-thumb {
-        background: #4f46e5;
-        border-radius: 4px;
-    }
-    
-    .console-output::-webkit-scrollbar-thumb:hover {
-        background: #6366f1;
-    }
-    
-    .console-line {
-        margin-bottom: 4px;
-        word-wrap: break-word;
-        padding: 5px 8px 5px 26px;
-        color: #22c55e;
-        background: rgba(15, 23, 42, 0.9);
-        border-left: 3px solid #4f46e5;
-        position: relative;
-        border-radius: 4px;
-    }
-    
-    .console-line::before {
-        content: '▶';
-        position: absolute;
-        left: 8px;
-        color: #60a5fa;
-        font-weight: bold;
-    }
-    
-    .success-box {
-        background: rgba(22, 163, 74, 0.15);
-        padding: 1rem;
-        border-radius: 10px;
-        color: #bbf7d0;
-        text-align: left;
-        margin: 0.8rem 0;
-        font-weight: 500;
-        font-size: 0.9rem;
-        border: 1px solid rgba(34, 197, 94, 0.5);
-    }
-    
-    .error-box {
-        background: rgba(239, 68, 68, 0.16);
-        padding: 1rem;
-        border-radius: 10px;
-        color: #fecaca;
-        text-align: left;
-        margin: 0.8rem 0;
-        font-weight: 500;
-        font-size: 0.9rem;
-        border: 1px solid rgba(248, 113, 113, 0.7);
-    }
-    
-    .info-card {
-        background: rgba(15, 23, 42, 0.98);
-        backdrop-filter: blur(10px);
-        padding: 1.3rem 1.4rem;
-        border-radius: 16px;
-        margin: 1.1rem 0;
-        border: 1px solid rgba(55, 65, 81, 0.95);
-        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.95);
-        color: #e5e7eb;
-    }
-    
-    .footer {
-        text-align: center;
-        padding: 1.6rem;
-        color: #6b7280;
-        font-weight: 500;
-        font-size: 0.85rem;
-        margin-top: 2.6rem;
-        background: rgba(15, 23, 42, 0.98);
-        border-radius: 12px;
-        border-top: 1px solid rgba(55, 65, 81, 0.9);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-    }
-    
-    [data-testid="stSidebar"] {
-        background: rgba(15, 23, 42, 0.98);
-        border-right: 1px solid rgba(31, 41, 55, 0.9);
-    }
-    
-    .sidebar-header {
+    .stButton>button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 32px rgba(37, 99, 235, 0.55);
         background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    }
+
+    /* Sidebar light card */
+    [data-testid="stSidebar"] {
+        background: rgba(255, 255, 255, 0.9);
+        border-right: 1px solid rgba(229, 231, 235, 1);
+    }
+
+    .sidebar-header {
+        background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
         padding: 1.4rem 0.9rem;
         border-radius: 14px;
         text-align: center;
         margin-bottom: 1.4rem;
-        color: #f9fafb;
+        color: #1f2937;
         font-weight: 700;
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
-    
+
     .brand-highlight {
-        background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         font-weight: 800;
     }
-    
-    .section-title {
-        color: #e5e7eb;
-        font-weight: 700;
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        border-bottom: 2px solid rgba(55, 65, 81, 0.9);
-        padding-bottom: 0.35rem;
-    }
-    
+
+    /* Status text */
     .status-running {
-        color: #22c55e;
+        color: #16a34a;
         font-weight: 700;
     }
     
