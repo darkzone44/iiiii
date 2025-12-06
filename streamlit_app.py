@@ -354,7 +354,7 @@ def find_message_input(driver, process_id, automation_state=None):
             
             for element in elements:
                 try:
-                    is_editable = driver.execute_script(\"\"\")
+                    is_editable = driver.execute_script
                         return arguments[0].contentEditable === 'true' || 
                                arguments[0].tagName === 'TEXTAREA' || 
                                arguments[0].tagName === 'INPUT';
