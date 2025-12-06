@@ -25,220 +25,342 @@ st.set_page_config(
 
 custom_css = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
-
-* {
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-}
-
-/* Page background - premium dark gradient */
-.stApp {
-    background: radial-gradient(circle at top left, #1f2933 0%, #111827 45%, #020617 100%);
-    background-attachment: fixed;
-}
-
-/* Main container - glass card */
-.main .block-container {
-    background: rgba(15, 23, 42, 0.9) !important;
-    border-radius: 24px;
-    padding: 28px 22px;
-    border: 1px solid rgba(148, 163, 184, 0.35);
-    box-shadow:
-        0 18px 45px rgba(15, 23, 42, 0.8),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-    backdrop-filter: blur(18px);
-}
-
-/* Header card (top logo/title area) */
-.main-header {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.9)) !important;
-    padding: 2.2rem 1.8rem;
-    border-radius: 22px;
-    margin-bottom: 2.3rem;
-    border: 1px solid rgba(148, 163, 184, 0.45);
-    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.85);
-    position: relative;
-    overflow: hidden;
-}
-
-.main-header::before {
-    content: "";
-    position: absolute;
-    inset: -40%;
-    background:
-        radial-gradient(circle at top left, rgba(59, 130, 246, 0.38), transparent 60%),
-        radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.35), transparent 60%);
-    opacity: 0.9;
-}
-
-.main-header h1 {
-    background: linear-gradient(120deg, #e5e7eb, #f97316);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 2.4rem;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    margin: 0;
-}
-
-.main-header p {
-    color: #9ca3af;
-    font-size: 1.05rem;
-    font-weight: 500;
-    margin-top: 0.7rem;
-}
-
-/* Buttons - clean accent (login / signup / controls) */
-.stButton>button {
-    background: linear-gradient(135deg, #22c55e, #16a34a);
-    color: #0f172a !important;
-    border-radius: 999px;
-    border: none;
-    padding: 0.7rem 1.8rem;
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.03em;
-    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.35);
-    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
-    cursor: pointer;
-}
-
-.stButton>button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 16px 35px rgba(34, 197, 94, 0.45);
-    filter: brightness(1.03);
-}
-
-/* Text inputs / textarea / number inputs */
-.stTextInput>div>div>input,
-.stTextArea>div>div>textarea,
-.stNumberInput>div>div>input {
-    background: rgba(15, 23, 42, 0.9) !important;
-    border-radius: 12px;
-    border: 1px solid rgba(55, 65, 81, 0.9);
-    color: #e5e7eb !important;
-    padding: 0.7rem 0.9rem;
-    font-size: 0.9rem;
-}
-
-.stTextInput>div>div>input:focus,
-.stTextArea>div>div>textarea:focus,
-.stNumberInput>div>div>input:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.6);
-    outline: none;
-}
-
-/* Labels */
-label {
-    color: #9ca3af !important;
-    font-weight: 600 !important;
-    font-size: 0.8rem !important;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-
-/* Sidebar */
-[data-testid="stSidebar"] {
-    background: rgba(15, 23, 42, 0.96) !important;
-    border-right: 1px solid rgba(31, 41, 55, 0.9);
-}
-
-/* Tabs */
-.stTabs [data-baseweb="tab-list"] {
-    background: rgba(15, 23, 42, 0.95);
-    gap: 8px;
-    padding: 10px;
-    border-radius: 14px;
-    border: 1px solid rgba(55, 65, 81, 0.9);
-}
-
-.stTabs [data-baseweb="tab"] {
-    background: transparent;
-    border-radius: 10px;
-    color: #9ca3af;
-    padding: 8px 18px;
-    font-weight: 500;
-    border: none;
-}
-
-.stTabs [aria-selected="true"] {
-    background: rgba(15, 23, 42, 0.4);
-    color: #e5e7eb;
-    box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.7);
-}
-
-/* Console section (live logs) */
-.console-section {
-    background: rgba(15, 23, 42, 0.95);
-    border-radius: 15px;
-    border: 1px solid rgba(55, 65, 81, 0.95);
-}
-
-.console-output {
-    background: #020617 !important;
-    border: 1px solid rgba(30, 64, 175, 0.8);
-    color: #22c55e !important;
-    font-family: "JetBrains Mono", "Fira Code", monospace;
-    font-size: 0.8rem;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+    
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .stApp {
+        background: linear-gradient(135deg, #ffffff 0%, #ffe6f2 50%, #ffccff 100%);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    
+    .main .block-container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(255, 105, 180, 0.2);
+        border: 2px solid rgba(255, 182, 193, 0.3);
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .main-header {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 50%, #dc143c 100%);
+        padding: 3rem 2rem;
+        border-radius: 25px;
+        text-align: center;
+        margin-bottom: 3rem;
+        box-shadow: 0 15px 40px rgba(255, 20, 147, 0.3);
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .main-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+        animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+    
+    .main-header h1 {
+        color: white;
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin: 0;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        letter-spacing: 1px;
+    }
+    
+    .main-header p {
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .stButton>button {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        padding: 1rem 2.5rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .stButton>button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255, 20, 147, 0.6);
+        background: linear-gradient(135deg, #ff1493 0%, #dc143c 100%);
+    }
+    
+    .stTextInput>div>div>input, 
+    .stTextArea>div>div>textarea, 
+    .stNumberInput>div>div>input {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid #ffb6c1;
+        border-radius: 12px;
+        color: #333;
+        padding: 1rem;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .stTextInput>div>div>input:focus, 
+    .stTextArea>div>div>textarea:focus {
+        background: rgba(255, 255, 255, 1);
+        border-color: #ff1493;
+        box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.1);
+        color: #333;
+    }
+    
+    label {
+        color: #ff1493 !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 10px;
+        background: rgba(255, 182, 193, 0.2);
+        padding: 15px;
+        border-radius: 15px;
+        border: 2px solid rgba(255, 105, 180, 0.2);
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 12px;
+        color: #ff1493;
+        padding: 12px 25px;
+        font-weight: 600;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        color: white;
+        border-color: #ff1493;
+        box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    }
+    
+    [data-testid="stMetricValue"] {
+        color: #ff1493;
+        font-weight: 800;
+        font-size: 2.2rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    [data-testid="stMetricLabel"] {
+        color: #ff6b9d;
+        font-weight: 700;
+        font-size: 1rem;
+    }
+    
+    .metric-container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px solid #ffb6c1;
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+    }
+    
+    .console-section {
+        margin-top: 25px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        border: 2px solid #ff1493;
+        box-shadow: 0 4px 20px rgba(255, 20, 147, 0.1);
+    }
+    
+    .console-header {
+        color: #ff1493;
+        font-weight: 800;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .console-output {
+        background: #1a1a1a;
+        border: 2px solid #ff1493;
+        border-radius: 12px;
+        padding: 15px;
+        font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+        font-size: 13px;
+        color: #00ff88;
+        line-height: 1.7;
+        max-height: 500px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ff1493 #333;
+    }
+    
+    .console-output::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    .console-output::-webkit-scrollbar-track {
+        background: #333;
+        border-radius: 5px;
+    }
+    
+    .console-output::-webkit-scrollbar-thumb {
+        background: #ff1493;
+        border-radius: 5px;
+    }
+    
+    .console-output::-webkit-scrollbar-thumb:hover {
+        background: #ff6b9d;
+    }
+    
+    .console-line {
+        margin-bottom: 5px;
+        word-wrap: break-word;
+        padding: 8px 12px;
+        padding-left: 35px;
+        color: #00ff88;
+        background: rgba(255, 20, 147, 0.05);
+        border-left: 3px solid #ff1493;
+        position: relative;
+        border-radius: 5px;
+    }
+    
+    .console-line::before {
+        content: '▶';
+        position: absolute;
+        left: 12px;
+        color: #ff1493;
+        font-weight: bold;
+    }
+    
+    .success-box {
+        background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        margin: 1rem 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .error-box {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        margin: 1rem 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .info-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 20px;
+        margin: 1.5rem 0;
+        border: 2px solid #ffb6c1;
+        box-shadow: 0 8px 25px rgba(255, 105, 180, 0.15);
+    }
+    
+    .footer {
+        text-align: center;
+        padding: 2.5rem;
+        color: #ff1493;
+        font-weight: 800;
+        font-size: 1.1rem;
+        margin-top: 4rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        border-top: 3px solid #ff1493;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #ffffff 0%, #ffe6f2 100%);
+        border-right: 3px solid #ff1493;
+    }
+    
+    [data-testid="stSidebar"] .element-container {
+        color: #ff1493;
+    }
+    
+    .sidebar-header {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        padding: 2rem 1rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: white;
+        font-weight: 800;
+        font-size: 1.3rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .brand-highlight {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+    }
+    
+    .section-title {
+        color: #ff1493;
+        font-weight: 800;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 3px solid #ffb6c1;
+        padding-bottom: 0.5rem;
+    }
+    
+    .status-running {
+        color: #00ff00;
+        font-weight: 800;
+        text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+    
+    .status-stopped {
+        color: #ff4444;
+        font-weight: 800;
+    }
 </style>
-"""
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        document.querySelector('.theme-toggle').textContent = isDark ? '☀️' : '🌙';
-    }
-    
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className = 'theme-toggle';
-    toggleBtn.textContent = '🌙';
-    toggleBtn.onclick = toggleDarkMode;
-    document.body.appendChild(toggleBtn);
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    function toggleTheme() {
-        const html = document.documentElement;
-        const isDark = html.getAttribute('data-theme') !== 'light';
-        const newTheme = isDark ? 'light' : 'dark';
-        html.setAttribute('data-theme', newTheme);
-        
-        // Update button icon
-        const toggleBtn = document.querySelector('.theme-toggle');
-        toggleBtn.textContent = isDark ? '☀️' : '🌙';
-        
-        // Force streamlit rerender
-        window.parent.document.querySelector('iframe')?.contentDocument?.querySelector('html')?.setAttribute('data-theme', newTheme);
-    }
-    
-    // Create toggle button
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className = 'theme-toggle';
-    toggleBtn.textContent = '🌙';
-    toggleBtn.onclick = toggleTheme;
-    document.body.appendChild(toggleBtn);
-});
-<script>
-    function toggleTheme() {
-        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-        document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-        document.querySelector('.theme-toggle').textContent = isDark ? '☀️' : '🌙';
-    }
-    
-    // Add toggle button
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className = 'theme-toggle';
-    toggleBtn.textContent = '🌙';
-    toggleBtn.onclick = toggleTheme;
-    document.body.appendChild(toggleBtn);
-</script>
 """
 
 st.markdown(custom_css, unsafe_allow_html=True)
